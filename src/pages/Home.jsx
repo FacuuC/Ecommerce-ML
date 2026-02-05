@@ -2,16 +2,16 @@ import { PresentationSection } from "../components/PresentationSection"
 import { PromCard } from "../components/PromCard"
 import { PromsSection } from "../components/PromsSection"
 
-export function HomePage() {
+export default function HomePage() {
     return (
-        <section>
+        <main>
             <PresentationSection />
             <PromsSection>
                 <PromCard />
                 <PromCard />
                 <PromCard />
             </PromsSection>
-        </section>
+        </main>
     )
 }
 

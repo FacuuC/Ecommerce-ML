@@ -7,7 +7,7 @@ import { Pagination } from "../components/Pagination.jsx"
 import '../App.css'
 import { SearchFormSection } from "../components/SearchFormSection.jsx"
 
-export function SearchPage() {
+export default function SearchPage() {
     const {
         handleFiltersChange,
         handlePageChange,

@@ -1,8 +1,16 @@
+import { CelCardFavButton } from "./CelCardFavButton"
 import { Link } from "./Link"
+import { useAuthStore } from "../store/authStore"
 
 export function CelCard({ productoCel }) {
+    const { isLoggedIn } = useAuthStore()
+
     return (
         <article key={productoCel.id} className="producto-card">
+            {isLoggedIn && (
+                <CelCardFavButton cel={productoCel} />
+            )
+            }
             <h3>{productoCel.modelo}</h3>
             <div className="producto-info">
                 <p><strong>Capacidad:</strong> {productoCel.almacenamiento} GB</p>
@@ -10,7 +18,7 @@ export function CelCard({ productoCel }) {
                 <p><strong>Batería:</strong> {productoCel.bateria}%</p>
                 <div className="detalle-precio">
                     <p className="precio"><strong>Precio:</strong> ${productoCel.precio}</p>
-                    <Link href={`/celulares/${productoCel.id}`}>
+                    <Link to={`/celulares/${productoCel.id}`}>
                         <button className="btn-comprar">Saber más</button>
                     </Link>
                 </div>

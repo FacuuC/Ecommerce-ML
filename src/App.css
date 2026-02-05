@@ -3,17 +3,18 @@
     --secondary-color: rgb(112, 178, 178);
     --tertiary-color: rgb(158, 207, 212);
     --quaternary-color: rgb(229, 233, 197);
-    --disabled-color:rgba(0, 85, 76, 0.76);
+    --disabled-color: rgba(0, 85, 76, 0.76);
 }
 
 * {
-    margin:0;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-html, body {
+html,
+body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
@@ -21,27 +22,27 @@ html, body {
 
 #app {
     display: flex;
-    min-height:100dvh;
+    min-height: 100dvh;
     flex-direction: column;
     background-color: #f5f5f5;
 }
 
-#main-catalogo{
-    flex:1;
+#main-catalogo {
+    flex: 1;
 }
 
 #menu-bar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color:var(--primary-color);
+    background-color: var(--primary-color);
     align-items: center;
     height: 7vh;
     padding: 0 1.8rem;
 }
 
-#menu-bar a{
-    text-decoration: none ;
+#menu-bar a {
+    text-decoration: none;
 }
 
 #menu-bar h2 {
@@ -55,32 +56,62 @@ html, body {
     color: #f0f0f0;
     margin: 0 1rem;
     padding: 0.6rem 0.5rem;
-    background-color: var(--secondary-color);
     border-radius: 20px;
 }
 
-#sign-in a {
-    text-decoration: none;
-    color: #f0f0f0;
-    margin: 0 1rem;
-    padding: 10px 15px;
+#nav-bar-profile{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    vertical-align: center;
+}
+
+.btn-login{
+    border: none;
     background-color: var(--secondary-color);
-    border-radius: 20px;
+    border-radius: 6px;
+    padding:  .3rem .8rem;
+    color: #f0f0f0;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover{
+        background-color: var(--tertiary-color);
+        color: #666;
+        transition: all ease 1s;
+    }
+}
+
+.btn-logout{
+    border: 1px solid rgb(189, 0, 0);
+    color: rgb(189, 0, 0);
+    background-color: rgba(255, 146, 146, 0.877);
+    padding:  .3rem .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+
+    &:hover{
+        background-color: rgb(189, 0, 0);
+        color: #f0f0f0;
+        transition: all ease .3s;
+    }
+
 }
 
 main {
     display: flex;
     position: relative;
     flex-direction: column;
-    min-height: 100vh;
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    flex-grow: 1;
 }
 
 #presentation-section {
     text-align: center;
-    margin:0 15vw;
+    margin: 0 15vw;
 }
 
 #presentation-section h1 {
@@ -88,18 +119,19 @@ main {
     font-weight: 700;
     color: var(--primary-color);
 }
+
 #presentation-section p {
     font-size: 1.2rem;
     font-weight: 400;
     padding-top: 2rem;
 }
 
-#proms-menu{
+#proms-menu {
     width: 100%;
     padding-top: 5rem;
 }
 
-#proms-menu h3{
+#proms-menu h3 {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -120,8 +152,8 @@ main {
     background-color: var(--quaternary-color);
     border-radius: 15%;
 }
-    
-#pie-pagina{
+
+#pie-pagina {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -130,12 +162,10 @@ main {
     text-align: center;
     padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-    margin-top: auto;
 }
 
 /* Estilos para el catálogo de celulares */
-.search-bar{
+.search-bar {
     display: flex;
 }
 
@@ -179,6 +209,40 @@ main {
     display: flex;
     flex-direction: column;
     align-self: start;
+    position: relative;
+}
+
+.btn-fav{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    z-index: 10;
+    top: .5rem;
+    left: .5rem;
+    background-color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;    
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover{
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .fav-svg{
+        width: 22px;
+        height: 22px;
+    }
+}
+
+.btn-fav.active{
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 .producto-card:hover {
@@ -219,10 +283,10 @@ main {
     color: #666;
     font-style: italic;
     padding-top: 2rem;
-    
+
 }
 
-.detalle-precio{
+.detalle-precio {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -230,7 +294,7 @@ main {
     border-top: 2px solid var(--tertiary-color);
 }
 
-.btn-comprar{
+.btn-comprar {
     background-color: var(--primary-color);
     color: #fff;
     border: none;
@@ -246,7 +310,7 @@ main {
     box-sizing: border-box;
 }
 
-.btn-comprar:hover{
+.btn-comprar:hover {
     background-color: var(--tertiary-color);
     border: #0f0f0f solid 1px;
     transition: 0.5s;
@@ -258,20 +322,39 @@ main {
     flex-direction: column;
     align-items: center;
 
-    h1{
+    h1 {
         font-size: 3rem;
         margin-top: 2rem;
         color: var(--primary-color);
         font-weight: 700;
     }
-    #cels-search-form{
+
+    #cels-search-form {
         width: 80%;
     }
-    #cels-search-input{
+
+    #cels-search-input {
         width: 100%;
     }
 }
 
+.nav-link-active {
+    pointer-events: none;
+    font-weight: 700;
+}
 
+.profile-fav-svg {
+    width: 18px;
+    height: auto;
+    display: block;
+}
 
+#profile-fav-info{
+    display: flex;
+    gap: 4px;
 
+    span{
+        color: #f0f0f0;
+        font-weight: 500;
+    }
+}

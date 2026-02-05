@@ -1,6 +1,15 @@
 import styles from "../components/ProductInfo.module.css"
+import { useState } from "react"
+import { useAuthStore } from "../store/authStore"
 
 export function ProductInfo({ cel }) {
+    const [productQuantity, setProductQuantity] = useState(1)
+
+    const increase = () => setProductQuantity(prev => prev + 1)
+    const decrease = () => setProductQuantity(prev => Math.max(1, prev - 1))
+    
+    const { isLoggedIn } = useAuthStore()
+
     return (
         <section className={styles.productInfo}>
             <header className={styles.productHeader}>
@@ -13,29 +22,35 @@ export function ProductInfo({ cel }) {
                     Dynamic Island, una forma mágica de interactuar con tu iPhone. Camara de 48MP para un nivel de detalle asombroso. Y todo en un diseño resistente.
                 </p>
             </header>
-            <p className="price">
-                <strong>${cel.precio}</strong>
-            </p>
+            <div className={styles.priceDetail}>
+                <p className={styles.price}>
+                    <strong>${cel.precio}</strong>
+                </p>
+                <span className={styles.stock}>
+                    En Stock
+                </span>
+            </div>
 
-            <form className="product-options">
+
+            <form className={styles.productOptions}>
 
                 <fieldset>
                     <legend>Color: {cel.color}</legend>
-                    <div className="color-options">
+                    <div className={styles.colorOptions}>
                         <label>
                             <input type="radio" name="color" />
-                            <span className="color-circle"></span>
+                            <span className={styles.colorCircle}></span>
                         </label>
                         <label>
                             <input type="radio" name="color" />
-                            <span className="color-circle"></span>
+                            <span className={styles.colorCircle}></span>
                         </label>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Almacenamiento</legend>
-                    <div className="storage-options">
+                    <div className={styles.storageOptions}>
                         <label>
                             <input type="radio" name="storage" />
                             <span>128GB</span>
@@ -50,29 +65,34 @@ export function ProductInfo({ cel }) {
                         </label>
                     </div>
                 </fieldset>
+                <div className={styles.shippingActions}>
+                    <div className={styles.quantity}>
+                        <button type="button" onClick={decrease}>-</button>
+                            <input 
+                            type="number" 
+                            value={productQuantity}
+                            min="1" defaultValue="1" 
+                            onChange={(e) => setProductQuantity(Number(e.target.value) || 1)}/>
+                        <button type="button" onClick={increase}>+</button>
 
-                <div className="quantity">
-                    <button type="button">-</button>
-                    <input type="number" min="1" defaultValue="1" />
-                    <button type="button">+</button>
-
-                    <div className="shipping-info">
-                        <p>Envío gratis</p>
-                        <p>Llega mañana</p>
+                        <div className={styles.shippingInfo}>
+                            <p>Envío gratis</p>
+                            <p>Llega mañana</p>
+                        </div>
                     </div>
+                    <div className={styles.shippingButtons}>
+                        <button disabled={!isLoggedIn} type="submit" className={styles.btnAddToCart}>
+                            {isLoggedIn ? '🛒 Añadir al carrito' : "Inicia Sesion para Añadir al carrito"}
+                        </button>
+                        <button type="button" className={styles.btnShare} aria-label="Compartir producto">
+                            🔗
+                        </button>
+                    </div>
+
                 </div>
-
-                <button type="submit" className="btn-add-to-cart">
-                    🛒 Añadir al carrito
-                </button>
-
-                <button type="button" className="btn-share" aria-label="Compartir producto">
-                    🔗
-                </button>
-
             </form>
 
-            <footer className="product-extra">
+            <footer className={styles.extra}>
                 <p>Garantía oficial de 12 meses incluida</p>
             </footer>
         </section>

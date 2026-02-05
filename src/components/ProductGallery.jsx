@@ -1,8 +1,12 @@
 import styles from "../components/ProductGallery.module.css"
 import { useState } from "react"
+import { CelCardFavButton } from "./CelCardFavButton"
+import { useAuthStore } from "../store/authStore"
 
-export function ProductGallery({ images }) {
+export function ProductGallery({ images, cel }) {
     const [activeImage, setActiveImage] = useState(images[0])
+
+    const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
 
     function handleChangeImage(img){
         if (img === activeImage) return
@@ -14,6 +18,9 @@ export function ProductGallery({ images }) {
         <section className={styles.productGallery}>
             {/* Imagen principal */}
             <figure className={styles.mainImage}>
+                { isLoggedIn &&
+                <CelCardFavButton cel={cel}/>
+                }
                 <img 
                 src={activeImage.src}
                 alt={activeImage.alt} 

@@ -47,7 +47,7 @@ export function SearchFormSection({ onFiltersChange, initialFilters }) {
                         defaultValue={initialFilters?.search || ''}
                     />
 
-                    <button onClick={handleClearInput}>Limpiar input</button>
+                    <button onClick={handleClearInput}>Limpiar filtros</button>
                 </div>
                 <div className="search-filters">
                     <select 

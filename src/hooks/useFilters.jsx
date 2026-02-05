@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "./useRouter"
+import { useSearchParams } from "react-router"
 
 const RESULTS_PER_PAGE = 12
 
-export function useFilters (){
+export function useFilters() {
+    const [searchParams, setSearchParams] = useSearchParams()
     const [filters, setFilters] = useState(() => {
-        const params = new URLSearchParams(window.location.search)
         // Leer batería: puede venir como minBateria o maxBateria
-        const minBateria = params.get('minBateria')
-        const maxBateria = params.get('maxBateria')
+        const minBateria = searchParams.get('minBateria')
+        const maxBateria = searchParams.get('maxBateria')
         const bateria = minBateria || maxBateria || ''
-        
+
         return {
-            search: params.get('search') || '',
-            marca: params.get('marca') || '',
-            capacidad: params.get('almacenamiento') || '',
+            search: searchParams.get('search') || '',
+            marca: searchParams.get('marca') || '',
+            capacidad: searchParams.get('almacenamiento') || '',
             bateria: Number(bateria)
         }
     })
 
     const [currentPage, setCurrentPage] = useState(() => {
-        const params = new URLSearchParams(window.location.search)
-        const page = Number(params.get('page'))
-        if (Number.isNaN(page) || Number(page) <= 0){
+        const page = Number(searchParams.get('page'))
+        if (Number.isNaN(page) || Number(page) <= 0) {
             return 1
-        } 
+        }
         console.log(Number(page))
         return Number(page)
     })
@@ -35,41 +35,42 @@ export function useFilters (){
     const [totalResultados, setTotalResultados] = useState(1)
     const { navigateTo } = useRouter()
 
-    const pageBackend = currentPage -1
+    const pageBackend = currentPage - 1
 
     useEffect(() => {
-        async function fetchCels (){
+        async function fetchCels() {
             try {
                 const params = new URLSearchParams()
                 if (filters.search) params.append('search', filters.search)
                 if (filters.marca) params.append('marca', filters.marca)
                 if (filters.capacidad) params.append('almacenamiento', filters.capacidad)
-                if (filters.bateria){
-                    if (filters.bateria <= 84) {params.append('maxBateria', filters.bateria)}
-                    else { params.append('minBateria', filters.bateria)
-                        if (filters.bateria === 100){ params.append('maxBateria', filters.bateria)}
-                        else { params.append('maxBateria', (filters.bateria + 4))}
+                if (filters.bateria) {
+                    if (filters.bateria <= 84) { params.append('maxBateria', filters.bateria) }
+                    else {
+                        params.append('minBateria', filters.bateria)
+                        if (filters.bateria === 100) { params.append('maxBateria', filters.bateria) }
+                        else { params.append('maxBateria', (filters.bateria + 4)) }
                     }
                 }
                 params.append('size', RESULTS_PER_PAGE)
                 params.append('page', pageBackend)
 
-                const queryParams = params.toString()                
+                const queryParams = params.toString()
 
                 setLoading(true)
                 const url = `http://localhost:8080/celulares?${queryParams}`
                 const response = await fetch(url)
                 const data = await response.json()
 
-                if (data.content){
+                if (data.content) {
                     setCels(data.content)
                     setTotalPages(data.totalPages)
                     setTotalResultados(data.totalElements)
-                }else {
+                } else {
                     setCels([])
                 }
             } catch (error) {
-                console.error('Error fetching celulares: ',error)
+                console.error('Error fetching celulares: ', error)
             } finally {
                 setLoading(false)
             }
@@ -79,29 +80,25 @@ export function useFilters (){
     }, [filters, currentPage])
 
     useEffect(() => {
-        const params = new URLSearchParams()
+            const params = new URLSearchParams()
 
-        if(filters.search) params.append('search', filters.search)
-        if(filters.marca) params.append('marca', filters.marca)
-        if(filters.capacidad) params.append('almacenamiento', filters.capacidad)
-            if (filters.bateria){
-                if (filters.bateria <= 84) {params.append('maxBateria', filters.bateria)}
-                else { params.append('minBateria', filters.bateria)
-                    if (filters.bateria === 100){ params.append('maxBateria', filters.bateria)}
-                    else { params.append('maxBateria', (filters.bateria + 4))}
-                }}
+            if (filters.search) params.set('search', filters.search)
+            if (filters.marca) params.set('marca', filters.marca)
+            if (filters.capacidad) params.set('almacenamiento', filters.capacidad)
+            
+            if (filters.bateria) {
+                if (filters.bateria <= 84) { 
+                    params.set('maxBateria', filters.bateria) 
+                } else {
+                    params.set('minBateria', filters.bateria)
+                    params.set('maxBateria', filters.bateria === 100 ? 100 : filters.bateria + 4)
+                }
+            }
 
-        if(currentPage > 1) params.append('page', currentPage)
+            if (currentPage > 1) params.set('page', currentPage)
+            setSearchParams(params)
 
-        const newUrl = params.toString()
-            ? `${window.location.pathname}?${params.toString()}`
-            : window.location.pathname
-
-        const currentUrl = window.location.pathname + window.location.search
-        if (currentUrl !== newUrl) {
-            navigateTo(newUrl)
-        }  
-    }, [filters, currentPage, navigateTo])
+    }, [filters, currentPage])
 
     const handlePageChange = (page) => {
         setCurrentPage(page)

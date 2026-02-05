@@ -65,3 +65,85 @@
     width: 100%;
     padding-bottom: 7rem;
 }
+
+.relatedProducts{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.relatedProductsHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productGrid{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.relatedProductCard{
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    height: 100%;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+
+    a{
+        text-decoration: none;
+    }
+
+    .badge{
+        color: #808080;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 0 6px;
+    }
+
+    .celModel{
+        color: black;
+        font-size: 16px;
+        padding: 0 8px;
+    }
+
+    .price{
+        margin-top: auto;
+        color: rgb(190, 82, 190);
+        font-weight: 700;
+        padding: .6rem;
+    }
+}
+
+.relatedImage{
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.badgeDiscount{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: 700;
+    font-size: smaller;
+    padding: 5px 10px;
+    color:#555;
+    background-color: rgba(255, 161, 255, 0.842);
+    border-radius: 10px;
+}

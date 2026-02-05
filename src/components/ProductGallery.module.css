@@ -9,10 +9,34 @@
     background: #f8f8f8;
     border-radius: 16px;
     overflow: hidden;
+    position: relative;
 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.favButton{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    z-index: 10;
+    top: .5rem;
+    left: .5rem;
+    background-color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;    
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favButton.active{
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 .mainImage img{

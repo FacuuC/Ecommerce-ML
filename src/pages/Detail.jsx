@@ -7,7 +7,7 @@ import { ProductInfo } from "../components/ProductInfo"
 
 import styles from "./Detail.module.css"
 
-export function CelDetail() {
+export default function CelDetail() {
     const { celId } = useParams()
 
     const [cel, setCel] = useState(null)
@@ -92,65 +92,67 @@ export function CelDetail() {
                 <article className={styles.productArticle}>
 
                     {/* Product Section */}
-                    <ProductGallery images={images} />
+                    <ProductGallery images={images} cel={cel}/>
 
                     {/* Información */}
                     <ProductInfo cel={cel} />
                 </article>
-                <section className="related-products">
-                    <header className="section-header">
+                <section className={styles.relatedProducts}>
+                    <header className={styles.relatedProductsHeader}>
                         <h2>También te puede interesar</h2>
-                        <div className="navigation-arrows">
+                        <div className={styles.navigationArrows}>
                             <button aria-label="Anterior">←</button>
                             <button aria-label="Siguiente">→</button>
                         </div>
                     </header>
 
-                    <div className="product-grid">
-                        <article className="product-card">
-                            <span className="badge">VISTO</span>
-                            <figure>
-                                <img src="" alt=""></img>
-                            </figure>
-                            <h3>iPhone 13 - Midnight</h3>
-                            <p className="price">$699</p>
-                            <button className="btn-view" aria-label="Ver producto">
-                                <span className="icon-eye"></span>
-                            </button>
+                    <div className={styles.productGrid}>
+                        <article className={styles.relatedProductCard}>
+                            <Link>
+                                <figure className={styles.relatedImage}>
+                                    <img src="../public/frontal-posterior.webp" alt="Vista general"></img>
+                                </figure>
+                                <span className={styles.badge}>Apple</span>
+                                <h3 className={styles.celModel}>iPhone 13 - Midnight</h3>
+                                <p className={styles.price}>$699</p>
+                            </Link>
                         </article>
 
-                        <article className="product-card">
-                            <figure>
-                                <img src="" alt=""></img>
-                            </figure>
-                            <h3>iPhone 14 - Blue</h3>
-                            <p className="price">$799</p>
-                            <button className="btn-view" aria-label="Ver producto">
-                                <span className="icon-eye"></span>
-                            </button>
+
+                        <article className={styles.relatedProductCard}>
+                            <Link>
+                                <figure className={styles.relatedImage}>
+                                    <img src="../public/frontal-posterior.webp" alt="Vista general"></img>
+                                </figure>
+                                <span className={styles.badge}>Apple</span>
+                                <h3 className={styles.celModel}>iPhone 14 - Blue</h3>
+                                <p className={styles.price}>$799</p>
+                            </Link>
                         </article>
 
-                        <article className="product-card">
-                            <span className="badge discount">-10%</span>
-                            <figure>
-                                <img src="#" alt=""></img>
-                            </figure>
-                            <h3>Silicone Case MagSafe</h3>
-                            <p className="price">$45</p>
-                            <button className="btn-view" aria-label="Ver producto">
-                                <span className="icon-eye"></span>
-                            </button>
+
+                        <article className={styles.relatedProductCard}>
+                            <Link>
+                                <span className={styles.badgeDiscount}>-10%</span>
+                                <figure className={styles.relatedImage}>
+                                    <img src="../public/frontal-posterior.webp" alt="Vista general"></img>
+                                </figure>
+                                <span className={styles.badge}>Apple</span>
+                                <h3 className={styles.celModel}>Silicone Case MagSafe</h3>
+                                <p className={styles.price}>$45</p>
+                            </Link>
                         </article>
 
-                        <article className="product-card">
-                            <figure>
-                                <img src="" alt=""></img>
-                            </figure>
-                            <h3>iPhone 13 Mini</h3>
-                            <p className="price">$699</p>
-                            <button className="btn-view" aria-label="Ver producto">
-                                <span className="icon-eye"></span>
-                            </button>
+                        <article className={styles.relatedProductCard}>
+                            <Link>
+
+                                <figure className={styles.relatedImage}>
+                                    <img src="../public/frontal-posterior.webp" alt="Vista general"></img>
+                                </figure>
+                                <span className={styles.badge}>Apple</span>
+                                <h3 className={styles.celModel}>iPhone 13 Mini</h3>
+                                <p className={styles.price}>$699</p>
+                            </Link>
                         </article>
                     </div>
                 </section>

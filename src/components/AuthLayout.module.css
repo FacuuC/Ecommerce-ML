@@ -1,0 +1,144 @@
+/*PRIMERA COLUMNA (Portada)*/
+
+.authWrapper{
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffffff;
+    padding: 4rem 20px;
+    
+}
+
+.authCard{
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    height: 700px;
+    background: #ffffff;
+    box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border-radius: 32px;
+}
+
+.authVisual{
+    width: 50%;
+    background: linear-gradient(135deg, #fceeff 0%, #f3e7ff 100%);
+    padding: 3rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.authVisualTitle{
+    font-family: 'Georgia', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02rem;
+    padding: 0 2rem;
+}
+
+.authVisualDescription{
+    font-size: 1rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    max-width: 90%;
+    padding: 0 2rem;
+}
+
+.visual{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+.backgroundImage{
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+
+    position: relative;
+    z-index: 1;
+
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    animation: slideUp .8s ease-out forwards;
+}
+
+@keyframes slideUp{
+    from { transform: translateY(50px); opacity: 0;}
+    to { transform: translateY(0); opacity: 1;}
+}
+
+.discount{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 2;
+
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    max-width: 90%;
+    border: 1px solid rgba(255,255,255,.4);
+}
+
+.discountLabel{
+    font-size: 1.2rem;
+    background-color: #c5fcd8;
+    width: 40px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.discountInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.discountStrong{
+    font-size: .9rem;
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.discountSmall{
+    font-size: .8rem;
+    color: #6b7280;
+}
+
+/*SEGUNDA COLUMNA (AuthSection)*/
+.authFormContainer{
+    width: 50%;
+    padding: 2rem;
+}
+
+.tabs{
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.login{
+    color: #1a1a1a;
+    text-decoration: none;
+}
