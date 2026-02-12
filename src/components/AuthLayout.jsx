@@ -32,13 +32,13 @@ export function AuthLayout({children, title, subtitle}) {
                     <nav className={styles.tabs}>
                         <NavLink 
                             to="/login"
-                            className={({ isActive }) => `login ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `${styles.tab} ${isActive ? styles.active : ''}`}
                         >
                             Iniciar Sesión
                         </NavLink>
                         <NavLink 
                             to="/register"
-                            className={({ isActive }) => `register ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `${styles.tab} ${isActive ? styles.active : ''}`}
                         >
                             Registrarse
                         </NavLink>

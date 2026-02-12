@@ -134,11 +134,57 @@
 
 .tabs{
     display: flex;
-    gap: 3rem;
+    background-color: #f1f5f9;
+    border-radius: 50px;
+    margin: 2rem 0;
     justify-content: center;
+    position: relative;
 }
 
-.login{
-    color: #1a1a1a;
+.tab{
+    flex: 1;
+    text-align: center;
+    padding: .7rem 0;
     text-decoration: none;
+    font-weight: 500;
+    color: #64748b;
+    font-size: .95rem;
+    transition: background-color .3s ease, color .3 ease;
+    position: relative;
+    z-index: 1;
+}
+
+.tab:first-child {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.tab:last-child{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.tab.active {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.tab:not(.active):hover{
+    color: #334155;
+    background-color: rgba(255,255,255, 0.5);
+}
+
+.text{
+    text-align: center;
+    padding-bottom: .2rem;
+
+}
+
+.subtext{
+    color: #6b7280;
+    text-align: center;
+    padding-bottom: 2rem;
 }

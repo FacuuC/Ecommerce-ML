@@ -1,14 +1,22 @@
 import { Link } from "./Link.jsx"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../store/authStore.js"
 import { useFavoritesStore } from "../store/favStore.js"
 
+
 export function Header() {
+    const navigate = useNavigate()
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
-    const login = useAuthStore((state) => state.login)
+    const favorites = useAuthStore((state) => state.favorites)
     const logout  = useAuthStore((state) => state.logout)
 
     const countFavorites = useFavoritesStore((state) => state.countFavorites)
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        logout()
+        navigate("/login")
+    }
 
     return (
         <header id="menu-bar">
@@ -55,7 +63,8 @@ export function Header() {
                         ?   <NavLink 
                                 to="/"
                                 className="btn-logout" 
-                                onClick={logout}>
+                                onClick={handleLogout}
+                            >
                                     Cerrar sesión
                             </NavLink>
                         :   <NavLink 
