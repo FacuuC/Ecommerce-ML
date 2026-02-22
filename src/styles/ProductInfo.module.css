@@ -1,4 +1,4 @@
-.productInfo{
+.productInfo {
     position: relative;
     background: white;
     border-radius: 15px;
@@ -10,18 +10,18 @@
     width: 100%;
     margin: 0 auto;
 
-    .productHeader{
+    .productHeader {
         display: flex;
         flex-direction: column;
         border-bottom: 1px solid rgba(75, 75, 75, 0.719);
         padding-bottom: 1rem;
 
-        .productRating{
+        .productRating {
             display: flex;
             gap: 1rem;
             align-items: center;
 
-            .brand{
+            .brand {
                 color: #7c3aed;
                 font-weight: 700;
                 font-size: small;
@@ -30,7 +30,7 @@
                 border-radius: 8px;
             }
 
-            .rating{
+            .rating {
                 color: #FB923C;
                 font-weight: 700;
                 font-size: small;
@@ -38,42 +38,42 @@
         }
     }
 
-    .description{
+    .description {
         color: rgba(75, 75, 75, 0.719);
     }
 
-    .priceDetail{
+    .priceDetail {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .price{
+        .price {
             font-size: 30px;
         }
 
-        .stock{
+        .stock {
             color: green;
             font-weight: 800;
-            font-size:x-small;
+            font-size: x-small;
             background-color: rgba(195, 248, 195, 0.733);
             padding: 4px 10px;
             border-radius: 8px;
         }
     }
 
-    .productOptions{
+    .productOptions {
         display: flex;
         flex-direction: column;
         height: 100%;
     }
 
-    .productOptions fieldset{
+    .productOptions fieldset {
         border: none;
         padding: 0;
         margin-bottom: 1.2rem;
     }
 
-    .productOptions legend{
+    .productOptions legend {
         font-weight: 600;
         margin-bottom: .5rem;
     }
@@ -82,16 +82,16 @@
         display: flex;
         gap: .6rem;
 
-        label{
+        label {
             cursor: pointer;
         }
 
-        input{
+        input {
             display: none;
         }
     }
 
-    .colorCircle{
+    .colorCircle {
         width: 28px;
         height: 28px;
         border-radius: 50%;
@@ -100,31 +100,36 @@
         border: 2px solid #ddd;
     }
 
-    .colorOptions label:nth-child(1) .colorCircle { background: #5b3b8d; }
-    .colorOptions label:nth-child(2) .colorCircle { background: #f2e7d5; }
+    .colorOptions label:nth-child(1) .colorCircle {
+        background: #5b3b8d;
+    }
 
-    .colorOptions input:checked + .colorCircle {
+    .colorOptions label:nth-child(2) .colorCircle {
+        background: #f2e7d5;
+    }
+
+    .colorOptions input:checked+.colorCircle {
         border-color: #3b3b3b63;
     }
 
-    .storageOptions{
+    .storageOptions {
         display: flex;
         gap: 0.7rem;
 
-        input{
+        input {
             display: none;
         }
 
-        input:checked + span {
+        input:checked+span {
             border: 2px solid #7c3aed;
             color: #7c3aed;
         }
 
-        label{
+        label {
             cursor: pointer;
         }
 
-        span{
+        span {
             display: block;
             padding: 0.5rem 1rem;
             border-radius: 999px;
@@ -134,13 +139,13 @@
         }
     }
 
-    .quantity{
+    .quantity {
         display: flex;
         align-items: center;
         gap: 1rem;
         margin: 1rem 0;
 
-        button{
+        button {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -149,7 +154,7 @@
             cursor: pointer;
         }
 
-        input{
+        input {
             width: 40px;
             text-align: center;
             border: none;
@@ -157,19 +162,25 @@
         }
     }
 
-    .shippingInfo p{
+    .shippingInfo p {
         font-size: .8rem;
         margin: 0;
         color: #555;
     }
 
-    .shippingActions{
+    .quantityShare {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .shippingActions {
         display: flex;
         flex-direction: column;
         margin-top: auto;
+        gap: 1rem;
     }
 
-    .shippingButtons{
+    .shippingButtons {
         display: flex;
         gap: 1rem;
     }
@@ -185,7 +196,7 @@
         margin-top: .5rem;
     }
 
-    .btnShare{
+    .btnShare {
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -195,13 +206,50 @@
         margin-top: .5rem;
     }
 
-    .extra{
+    .extra {
         color: #555;
         font-weight: 400;
-        font-size: smaller;  
+        font-size: smaller;
         align-self: center;
     }
 }
+
+.inCartActions {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+}
+
+.keepShopping {
+    width: 100%;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    font-size: .9rem;
+    background: #7c3aed33;
+    border: none;
+    border-radius: 999px;
+    padding: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: .5rem;
+}
+
+.goCart {
+    text-decoration: none;
+    font-size: .9rem;
+    width: 100%;
+    padding: .8rem;
+    border-radius: 999px;
+    text-align: center;
+    background-color: #ffeb00;
+    color: black;
+    font-weight: bold;
+
+}
+
+
 
 /* Chrome, Edge, Safari */
 input[type="number"]::-webkit-inner-spin-button,

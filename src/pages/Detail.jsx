@@ -1,11 +1,12 @@
 import { useParams, useNavigate } from "react-router"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 import { Link } from "../components/Link"
 import { ProductGallery } from "../components/ProductGallery"
 import { ProductInfo } from "../components/ProductInfo"
+import { trackEvent } from "../services/trackingService"
 
-import styles from "./Detail.module.css"
+import styles from "../styles/Detail.module.css"
 
 export default function CelDetail() {
     const { celId } = useParams()
@@ -13,7 +14,8 @@ export default function CelDetail() {
     const [cel, setCel] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
+    const hasTracked = useRef(false)
 
     const images = [
         { src: "../public/frontal-posterior.webp", alt: "Vista general" },
@@ -37,6 +39,15 @@ export default function CelDetail() {
                 setLoading(false)
             })
     }, [celId])
+
+    useEffect(() => {
+        if (cel?.id && !hasTracked.current) {
+            trackEvent("VIEW_PRODUCT", cel.id, {
+                source: "detail_page"
+            })
+            hasTracked.current = true
+        }
+    }, [cel])
 
     if (loading) {
         return <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>

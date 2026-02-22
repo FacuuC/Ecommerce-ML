@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import styles from "./AuthLayout.module.css"
+import styles from "../styles/AuthLayout.module.css"
 
 export function AuthLayout({children, title, subtitle}) {
     return (

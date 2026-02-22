@@ -1,8 +1,8 @@
 import { AuthLayout } from "../components/AuthLayout"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../store/authStore"
-import {  useId } from "react"
-import styles from "./LoginRegister.module.css"
+import {  useId, useState } from "react"
+import styles from "../styles/LoginRegister.module.css"
 import toast from "react-hot-toast"
 
 export default function LoginPage() {
@@ -10,6 +10,17 @@ export default function LoginPage() {
     const error = useAuthStore((state) => state.error)
     const loading = useAuthStore((state) => state.loading)
     const setError = useAuthStore((state) => state.setError)
+
+    const [visibleFields, setVisibleFields] = useState({
+        password: false
+    })
+
+    const togglePasswordVisibility = () => {
+        setVisibleFields(prev => ({
+            ...prev,
+            password: !prev.password
+        }))
+    }
 
     const navigate = useNavigate()
     const passwordId = useId()
@@ -73,14 +84,15 @@ export default function LoginPage() {
                     <div className={styles.inputWrapper}>
                         <span className={styles.iconLeft}>🔒</span>
                         <input
-                            type="password"
+                            type={visibleFields.password ? "text" : "password"}
                             name={passwordId}
                             id={passwordId}
                             placeholder="Contraseña"
                             className={`${styles.input} ${error ? styles.error : ''}`}
                             required
                         />
-                        <button type="button" className={styles.btnEye} aria-label="Mostrar contraseña">
+                        <button 
+                        type="button" className={styles.btnEye} aria-label="Mostrar contraseña" onClick={togglePasswordVisibility}>
                             👁️
                         </button>
                     </div>

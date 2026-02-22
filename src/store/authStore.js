@@ -1,7 +1,10 @@
 import { create } from "zustand";
 import { loginRequest, registerRequest } from "../api/authApi";
+import { trackEvent } from "../services/trackingService";
+import { useCartStore } from "./cartStore";
+import { useSessionStore } from "./sessionStore";
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set, get) => ({
     user: null,
     token: null,
     loading: false,
@@ -17,16 +20,19 @@ export const useAuthStore = create((set) => ({
             const res = await loginRequest({ email, password })
 
             set({
-                user: res.data.user,
+                user: res.data.userId,
                 token: res.data.token,
                 loading: false,
                 isLoggedIn: true
             })
 
             localStorage.setItem('token', res.data.token)
+            await get().bootstrapSession()
+
             return true
 
         } catch (err) {
+            console.error("Error en login:", err)
 
             const message =
                 err.response?.data?.message ||
@@ -36,6 +42,11 @@ export const useAuthStore = create((set) => ({
                 error: message,
                 loading: false
             });
+
+            trackEvent("LOGIN_FAILED", null, {
+                method: "email_password",
+                errorMessage: message
+            })
 
             return false
         }
@@ -59,6 +70,10 @@ export const useAuthStore = create((set) => ({
                 error: null
             })
 
+            trackEvent("REGISTER", null,{
+                method: "email_password",
+            })
+
             return true
 
         } catch (err) {
@@ -77,12 +92,39 @@ export const useAuthStore = create((set) => ({
         }
     },
 
+
     logout: () => {
         set({
             user: null,
             token: null,
             isLoggedIn: false
         })
+
         localStorage.removeItem('token')
+        useSessionStore.getState().resetSession()
+        useCartStore.getState().clearCart()
+        trackEvent("LOGOUT", null, {
+            method: "email_password",
+        })
+    }, 
+
+
+    bootstrapSession: async () => {
+        await useCartStore.getState().fetchCart()
+
+        trackEvent("LOGIN", null,{
+                    method: "email_password",
+        })
+    },
+
+
+    restoreSession: async (token) => {
+        set({ token, isLoggedIn: true })
+
+        try {
+            await useCartStore.getState().fetchCart()
+        } catch (error) {
+            console.error("Error restaurando sesión:", error)
+        }
     }
 }))

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import { useRouter } from "./useRouter"
+import { useEffect, useState, useRef } from "react"
 import { useSearchParams } from "react-router"
+import { trackEvent } from "../services/trackingService"
+
 
 const RESULTS_PER_PAGE = 12
 
@@ -33,7 +34,7 @@ export function useFilters() {
     const [loading, setLoading] = useState(false)
     const [totalPages, setTotalPages] = useState(1)
     const [totalResultados, setTotalResultados] = useState(1)
-    const { navigateTo } = useRouter()
+    const lastQueryRef = useRef("")
 
     const pageBackend = currentPage - 1
 
@@ -66,6 +67,25 @@ export function useFilters() {
                     setCels(data.content)
                     setTotalPages(data.totalPages)
                     setTotalResultados(data.totalElements)
+
+                    const cleanQuery = filters.search?.trim()
+
+                    if (cleanQuery && lastQueryRef.current !== cleanQuery) {
+                        trackEvent("SEARCH_QUERY", 
+                            null, 
+                            {
+                                query: cleanQuery,
+                                resultsCount: data.totalElements,
+                                filters: {
+                                    marca: filters.marca || null,
+                                    capacidad: filters.capacidad || null,
+                                    bateria: filters.bateria || null
+                                },
+                                source:"search_page"
+                            }
+                        )
+                        lastQueryRef.current = cleanQuery
+                    }
                 } else {
                     setCels([])
                 }

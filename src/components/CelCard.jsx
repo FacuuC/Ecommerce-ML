@@ -1,4 +1,4 @@
-import { CelCardFavButton } from "./CelCardFavButton"
+import { CelFavButton } from "./CelFavButton"
 import { Link } from "./Link"
 import { useAuthStore } from "../store/authStore"
 
@@ -8,7 +8,7 @@ export function CelCard({ productoCel }) {
     return (
         <article key={productoCel.id} className="producto-card">
             {isLoggedIn && (
-                <CelCardFavButton cel={productoCel} />
+                <CelFavButton cel={productoCel} pageSource="search_page"/>
             )
             }
             <h3>{productoCel.modelo}</h3>

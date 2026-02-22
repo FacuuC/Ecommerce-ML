@@ -1,7 +1,7 @@
-import styles from "../components/ProductGallery.module.css"
 import { useState } from "react"
-import { CelCardFavButton } from "./CelCardFavButton"
+import { CelFavButton } from "./CelFavButton"
 import { useAuthStore } from "../store/authStore"
+import styles from "../styles/ProductGallery.module.css"
 
 export function ProductGallery({ images, cel }) {
     const [activeImage, setActiveImage] = useState(images[0])
@@ -19,7 +19,7 @@ export function ProductGallery({ images, cel }) {
             {/* Imagen principal */}
             <figure className={styles.mainImage}>
                 { isLoggedIn &&
-                <CelCardFavButton cel={cel}/>
+                <CelFavButton cel={cel} pageSource="detail_page"/>
                 }
                 <img 
                 src={activeImage.src}

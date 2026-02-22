@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../store/authStore"
 import { useId, useState } from "react"
 import toast from "react-hot-toast"
-import styles from "./LoginRegister.module.css"
+import styles from "../styles/LoginRegister.module.css"
 import clsx from "clsx"
 
 export default function RegisterPage() {
@@ -12,7 +12,7 @@ export default function RegisterPage() {
     const setError = useAuthStore((state) => state.setError)
     const loading = useAuthStore((state) => state.loading)
 
-    const [visibleFIelds, setVisibleFields] = useState({
+    const [visibleFields, setVisibleFields] = useState({
         password: false,
         confirmPassword: false
     })
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                         <span className={styles.iconLeft}>🔒</span>
                         <input
                             name="password"
-                            type={visibleFIelds.password ? "text" : "password"}
+                            type={visibleFields.password ? "text" : "password"}
                             id={passwordId}
                             placeholder="••••••••"
                             className={clsx(
@@ -133,7 +133,7 @@ export default function RegisterPage() {
                         <span className={styles.iconLeft}>🔄</span>
                         <input
                             name="confirmPassword"
-                            type={visibleFIelds.confirmPassword ? "text" : "password"}
+                            type={visibleFields.confirmPassword ? "text" : "password"}
                             id={confirmPasswordId}
                             placeholder="••••••••"
                             className={clsx(
