@@ -1,12 +1,15 @@
 import { Routes, Route } from 'react-router'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import { Header } from "./components/Header.jsx"
 import { Footer } from "./components/Footer.jsx"
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
+import { useAuthStore } from './store/authStore.js'
+
 
 import './App.css'
+import { useSessionStore } from './store/sessionStore.js'
 
 const HomePage = lazy(() => import("./pages/Home.jsx"))
 const SearchPage = lazy(() => import("./pages/Search.jsx"))
@@ -15,8 +18,21 @@ const CelDetail = lazy(() => import('./pages/Detail.jsx'))
 const ProfilePage = lazy(() => import("./pages/Profile.jsx"))
 const LoginPage = lazy(() => import("./pages/Login.jsx"))
 const RegisterPage = lazy(() => import("./pages/Register.jsx"))
+const CartPage = lazy(() => import("./pages/Cart.jsx"))
 
 export function App() {
+    const initSession = useSessionStore((state) => state.initSession)
+
+    useEffect(() => {
+        document.title = "Matienzo Shop - Tu tienda de celulares online"
+        initSession()
+        const token = localStorage.getItem('token')
+
+        if (token) {
+            // Si hay un token, bootstrap de la sesión para cargar datos como el carrito
+            useAuthStore.getState().restoreSession(token)
+        }
+    }, [])
 
     return (
         <>
@@ -35,6 +51,11 @@ export function App() {
                     <Route path="/celulares/:celId" element={<CelDetail />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/cart" element={
+                        <ProtectedRoute redirectTo="/login">
+                            <CartPage />
+                        </ProtectedRoute>
+                    } />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </Suspense>

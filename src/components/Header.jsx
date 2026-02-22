@@ -1,22 +1,16 @@
 import { Link } from "./Link.jsx"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../store/authStore.js"
-import { useFavoritesStore } from "../store/favStore.js"
+import { useCartStore } from "../store/cartStore.js"
+import { CartProfile } from "./CartProfile.jsx"
 
 
 export function Header() {
-    const navigate = useNavigate()
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
-    const favorites = useAuthStore((state) => state.favorites)
-    const logout  = useAuthStore((state) => state.logout)
+    const hydrated = useCartStore((state) => state.hydrated)
+    const { items } = useCartStore()
 
-    const countFavorites = useFavoritesStore((state) => state.countFavorites)
-
-    const handleLogout = (e) => {
-        e.preventDefault()
-        logout()
-        navigate("/login")
-    }
+    const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
 
     return (
         <header id="menu-bar">
@@ -28,29 +22,13 @@ export function Header() {
                 <NavLink
                     to="/"
                     className={({ isActive }) => isActive ? 'nav-link-active' : ''}>
-                    Inicio</NavLink>
+                    Inicio
+                </NavLink>
                 <NavLink
                     className={({ isActive }) => isActive ? 'nav-link-active' : ''}
                     to="/search">
                     Celulares
                 </NavLink>
-                {
-                    isLoggedIn && (
-                        <NavLink
-                            id="nav-bar-profile"
-                            className={({ isActive }) => isActive ? 'nav-link-active' : ''}
-                            to="/profile">
-                            Perfil
-                            <div id="profile-fav-info">
-                                <span>{countFavorites()}</span>
-                                <img
-                                    src="/fav.svg"
-                                    className="profile-fav-svg">
-                                </img>
-                            </div>
-                        </NavLink>
-                    )
-                }
                 <NavLink
                     to="/sobre-nosotros"
                     className={({ isActive }) => isActive ? 'nav-link-active' : ''}>
@@ -60,18 +38,12 @@ export function Header() {
             <div id="sign-in">
                 {
                     isLoggedIn
-                        ?   <NavLink 
-                                to="/"
-                                className="btn-logout" 
-                                onClick={handleLogout}
-                            >
-                                    Cerrar sesión
-                            </NavLink>
-                        :   <NavLink 
-                                to="/login"
-                                className="btn-login" >
-                                    Iniciar sesión
-                            </NavLink>
+                        ? <CartProfile totalItems={hydrated ? totalItems : null} />
+                        : <NavLink
+                            to="/login"
+                            className="btn-login" >
+                            Iniciar sesión
+                        </NavLink>
                 }
             </div>
         </header>
