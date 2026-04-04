@@ -1,0 +1,650 @@
+[
+    {
+        "id":1,
+        "MODELO": "iPhone 11",
+        "CAPACIDAD": "64",
+        "COLOR": "Red",
+        "BATERIA": "100",
+        "PRECIO": "235",
+        "DETALLES": ""
+    },
+    {
+        "id":2,
+        "MODELO": "iPhone 11",
+        "CAPACIDAD": "64",
+        "COLOR": "Black",
+        "BATERIA": "100",
+        "PRECIO": "235",
+        "DETALLES": ""
+    },
+    {
+        "id":3,
+        "MODELO": "iPhone 11",
+        "CAPACIDAD": "128",
+        "COLOR": "Purple",
+        "BATERIA": "100",
+        "PRECIO": "255",
+        "DETALLES": ""
+    },
+    {
+        "id":4,
+        "MODELO": "iPhone 11",
+        "CAPACIDAD": "128",
+        "COLOR": "White",
+        "BATERIA": "100",
+        "PRECIO": "255",
+        "DETALLES": ""
+    },
+    {
+        "id":5,
+        "MODELO": "iPhone 11",
+        "CAPACIDAD": "128",
+        "COLOR": "Black",
+        "BATERIA": "100",
+        "PRECIO": "255",
+        "DETALLES": ""
+    },
+    {
+        "id":6,
+        "MODELO": "iPhone 11",
+        "CAPACIDAD": "128",
+        "COLOR": "Black",
+        "BATERIA": "100",
+        "PRECIO": "255",
+        "DETALLES": ""
+    },
+    {
+        "id":7,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "White",
+        "BATERIA": "86",
+        "PRECIO": "265",
+        "DETALLES": ""
+    },
+    {
+        "id":8,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "Purple",
+        "BATERIA": "87",
+        "PRECIO": "265",
+        "DETALLES": ""
+    },
+    {
+        "id":9,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "Blue",
+        "BATERIA": "87",
+        "PRECIO": "265",
+        "DETALLES": ""
+    },
+    {
+        "id":10,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "Midnight",
+        "BATERIA": "88",
+        "PRECIO": "265",
+        "DETALLES": ""
+    },
+    {
+        "id":11,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "Blue",
+        "BATERIA": "90",
+        "PRECIO": "270",
+        "DETALLES": ""
+    },
+    {
+        "id":12,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "Midnight",
+        "BATERIA": "100",
+        "PRECIO": "275",
+        "DETALLES": ""
+    },
+    {
+        "id":13,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "64",
+        "COLOR": "Midnight",
+        "BATERIA": "100",
+        "PRECIO": "275",
+        "DETALLES": ""
+    },
+    {
+        "id":14,
+        "MODELO":"iPhone 12",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "84",
+        "PRECIO": "295",
+        "DETALLES": ""
+    },
+    {
+        "id":15,
+        "MODELO": "iPhone 12",
+        "CAPACIDAD": "128",
+        "COLOR": "Purple",
+        "BATERIA": "100",
+        "PRECIO": "305",
+        "DETALLES": ""
+    },
+    {
+        "id":16,
+        "MODELO": "iPhone 12 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Golden",
+        "BATERIA": "100",
+        "PRECIO": "330",
+        "DETALLES": ""
+    },
+    {
+        "id":17,
+        "MODELO": "iPhone 12 Pro",
+        "CAPACIDAD": "256",
+        "COLOR": "Blue",
+        "BATERIA": "100",
+        "PRECIO": "350",
+        "DETALLES": ""
+    },
+    {
+        "id":18,
+        "MODELO": "iPhone 12 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "White",
+        "BATERIA": "100",
+        "PRECIO": "350",
+        "DETALLES": ""
+    },
+    {
+        "id":19,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "83",
+        "PRECIO": "355",
+        "DETALLES": ""
+    },
+    {
+        "id":20,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "83",
+        "PRECIO": "355",
+        "DETALLES": ""
+    },
+    {
+        "id":21,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "83",
+        "PRECIO": "355",
+        "DETALLES": ""
+    },
+    {
+        "id":22,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "84",
+        "PRECIO": "355",
+        "DETALLES": ""
+    },
+    {
+        "id":23,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "84",
+        "PRECIO": "355",
+        "DETALLES": ""
+    },
+    {
+        "id":24,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Green",
+        "BATERIA": "85",
+        "PRECIO": "360",
+        "DETALLES": ""
+    },
+    {
+        "id":25,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "85",
+        "PRECIO": "360",
+        "DETALLES": ""
+    },
+    {
+        "id":26,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "86",
+        "PRECIO": "370",
+        "DETALLES": ""
+    },
+    {
+        "id":27,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "87",
+        "PRECIO": "375",
+        "DETALLES": ""
+    },
+    {
+        "id":28,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Red",
+        "BATERIA": "88",
+        "PRECIO": "375",
+        "DETALLES": ""
+    },
+    {
+        "id":29,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Green",
+        "BATERIA": "88",
+        "PRECIO": "375",
+        "DETALLES": ""
+    },
+    {   
+        "id":30,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Green",
+        "BATERIA": "89",
+        "PRECIO": "375",
+        "DETALLES": ""
+    },
+    {
+        "id":31,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "89",
+        "PRECIO": "375",
+        "DETALLES": ""
+    },
+    {   
+        "id":32,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "White",
+        "BATERIA": "92",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {   
+        "id":33,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "93",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {   
+        "id":34,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "96",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {   
+        "id":35,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Green",
+        "BATERIA": "100",
+        "PRECIO": "410",
+        "DETALLES": "Bateria Original"
+    },
+    {
+        "id":36,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Red",
+        "BATERIA": "100",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {
+        "id":37,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "100",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {
+        "id":38,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "100",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {
+        "id":39,
+        "MODELO": "iPhone 13",
+        "CAPACIDAD": "128",
+        "COLOR": "Red",
+        "BATERIA": "100",
+        "PRECIO": "390",
+        "DETALLES": ""
+    },
+    {
+        "id":40,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "100",
+        "PRECIO": "400",
+        "DETALLES": "no anda la camara 0,5"
+    },
+    {
+        "id":41,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Grafito",
+        "BATERIA": "100",
+        "PRECIO": "400",
+        "DETALLES": "no anda la camara 0,5"
+    },
+    {
+        "id":42,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "79",
+        "PRECIO": "420",
+        "DETALLES": ""
+    },
+    {
+        "id":43,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Silver",
+        "BATERIA": "84",
+        "PRECIO": "450",
+        "DETALLES": ""
+    },
+    {
+        "id":44,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Silver",
+        "BATERIA": "84",
+        "PRECIO": "450",
+        "DETALLES": ""
+    },
+    {
+        "id":45,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Silver",
+        "BATERIA": "85",
+        "PRECIO": "460",
+        "DETALLES": ""
+    },
+    {
+        "id":46,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "85",
+        "PRECIO": "460",
+        "DETALLES": ""
+    },
+    {
+        "id":47,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Silver",
+        "BATERIA": "86",
+        "PRECIO": "465",
+        "DETALLES": ""
+    },
+    {
+        "id":48,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Silver",
+        "BATERIA": "86",
+        "PRECIO": "465",
+        "DETALLES": ""
+    },
+    {
+        "id":49,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "100",
+        "PRECIO": "475",
+        "DETALLES": ""
+    },
+    {
+        "id":50,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "100",
+        "PRECIO": "475",
+        "DETALLES": ""
+    },
+    {
+        "id":51,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "100",
+        "PRECIO": "475",
+        "DETALLES": ""
+    },
+    {
+        "id":52,
+        "MODELO": "iPhone 13 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "100",
+        "PRECIO": "475",
+        "DETALLES": ""
+    },
+    {
+        "id":53,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Green",
+        "BATERIA": "81",
+        "PRECIO": "480",
+        "DETALLES": ""
+    },
+    {
+        "id":54,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "83",
+        "PRECIO": "480",
+        "DETALLES": ""
+    },
+    {
+        "id":55,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Golden",
+        "BATERIA": "83",
+        "PRECIO": "480",
+        "DETALLES": ""
+    },
+    {
+        "id":56,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "84",
+        "PRECIO": "490",
+        "DETALLES": ""
+    },
+    {   
+        "id":57,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "85",
+        "PRECIO": "490",
+        "DETALLES": ""
+    },
+    {
+        "id":58,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "86",
+        "PRECIO": "500",
+        "DETALLES": ""
+    },
+    {
+        "id":59,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "86",
+        "PRECIO": "500",
+        "DETALLES": ""
+    },
+    {
+        "id":60,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "86",
+        "PRECIO": "510",
+        "DETALLES": ""
+    },
+    {
+        "id":61,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Graphite",
+        "BATERIA": "87",
+        "PRECIO": "510",
+        "DETALLES": ""
+    },
+    {
+        "id":62,
+        "MODELO": "iPhone 13 Pro Max",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue Sierra",
+        "BATERIA": "100",
+        "PRECIO": "530",
+        "DETALLES": ""
+    },
+    {
+        "id":63,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "83",
+        "PRECIO": "380",
+        "DETALLES": ""
+    },
+    {
+        "id":64,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "Red",
+        "BATERIA": "86",
+        "PRECIO": "395",
+        "DETALLES": ""
+    },
+    {
+        "id":65,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "87",
+        "PRECIO": "395",
+        "DETALLES": ""
+    },
+    {
+        "id":66,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "purple",
+        "BATERIA": "100",
+        "PRECIO": "420",
+        "DETALLES": ""
+    },
+    {
+        "id":67,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "Blue",
+        "BATERIA": "100",
+        "PRECIO": "420",
+        "DETALLES": ""
+    },
+    {
+        "id":68,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "100",
+        "PRECIO": "420",
+        "DETALLES": ""
+    },
+    {
+        "id":69,
+        "MODELO": "iPhone 14",
+        "CAPACIDAD": "128",
+        "COLOR": "Midnight",
+        "BATERIA": "100",
+        "PRECIO": "450",
+        "DETALLES": "Bateria Original"
+    },
+    {   
+        "id":70,
+        "MODELO": "iPhone 14 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Purple",
+        "BATERIA": "84",
+        "PRECIO": "530",
+        "DETALLES": ""
+    },
+    {
+        "id":71,
+        "MODELO": "iPhone 14 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Purple",
+        "BATERIA": "85",
+        "PRECIO": "550",
+        "DETALLES": ""
+    },
+    {
+        "id":72,
+        "MODELO": "iPhone 14 Pro",
+        "CAPACIDAD": "128",
+        "COLOR": "Black",
+        "BATERIA": "86",
+        "PRECIO": "560",
+        "DETALLES": ""
+    }
+]

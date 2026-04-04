@@ -1,0 +1,33 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.9rem;
+    justify-content: center;
+    padding: 5vh 0;
+    margin-top: auto;
+
+    a{
+        text-decoration: none;
+        color: #0f0f0f;
+        padding: 0.7rem 1.2rem;
+        border-radius: 10px;
+    }
+    a:hover, a:focus{
+        background-color: var(--secondary-color);
+        transition: background-color 0.3s ease;
+    }
+    a:active{
+        transform: scale(0.90);
+    }
+}
+
+.isActive{
+    pointer-events: none;
+    background-color: var(--secondary-color);
+}
+
+.isDisabled{
+    opacity: 0.5;
+    pointer-events: none;
+}

@@ -1,0 +1,264 @@
+.productInfo {
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+
+    .productHeader {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid rgba(75, 75, 75, 0.719);
+        padding-bottom: 1rem;
+
+        .productRating {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            .brand {
+                color: #7c3aed;
+                font-weight: 700;
+                font-size: small;
+                background: #8c52f03b;
+                padding: 3px 6px;
+                border-radius: 8px;
+            }
+
+            .rating {
+                color: #FB923C;
+                font-weight: 700;
+                font-size: small;
+            }
+        }
+    }
+
+    .description {
+        color: rgba(75, 75, 75, 0.719);
+    }
+
+    .priceDetail {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .price {
+            font-size: 30px;
+        }
+
+        .stock {
+            color: green;
+            font-weight: 800;
+            font-size: x-small;
+            background-color: rgba(195, 248, 195, 0.733);
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+    }
+
+    .productOptions {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .productOptions fieldset {
+        border: none;
+        padding: 0;
+        margin-bottom: 1.2rem;
+    }
+
+    .productOptions legend {
+        font-weight: 600;
+        margin-bottom: .5rem;
+    }
+
+    .colorOptions {
+        display: flex;
+        gap: .6rem;
+
+        label {
+            cursor: pointer;
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    .colorCircle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: block;
+        background: #ddd;
+        border: 2px solid #ddd;
+    }
+
+    .colorOptions label:nth-child(1) .colorCircle {
+        background: #5b3b8d;
+    }
+
+    .colorOptions label:nth-child(2) .colorCircle {
+        background: #f2e7d5;
+    }
+
+    .colorOptions input:checked+.colorCircle {
+        border-color: #3b3b3b63;
+    }
+
+    .storageOptions {
+        display: flex;
+        gap: 0.7rem;
+
+        input {
+            display: none;
+        }
+
+        input:checked+span {
+            border: 2px solid #7c3aed;
+            color: #7c3aed;
+        }
+
+        label {
+            cursor: pointer;
+        }
+
+        span {
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid #ddd;
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+
+    .quantity {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+
+        button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: #f1f1f1;
+            cursor: pointer;
+        }
+
+        input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            font-weight: 600;
+        }
+    }
+
+    .shippingInfo p {
+        font-size: .8rem;
+        margin: 0;
+        color: #555;
+    }
+
+    .quantityShare {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .shippingActions {
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+        gap: 1rem;
+    }
+
+    .shippingButtons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btnAddToCart {
+        width: 100%;
+        background: #ffeb00;
+        border: none;
+        border-radius: 999px;
+        padding: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: .5rem;
+    }
+
+    .btnShare {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: #f1f1f1;
+        cursor: pointer;
+        margin-top: .5rem;
+    }
+
+    .extra {
+        color: #555;
+        font-weight: 400;
+        font-size: smaller;
+        align-self: center;
+    }
+}
+
+.inCartActions {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+}
+
+.keepShopping {
+    width: 100%;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    font-size: .9rem;
+    background: #7c3aed33;
+    border: none;
+    border-radius: 999px;
+    padding: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: .5rem;
+}
+
+.goCart {
+    text-decoration: none;
+    font-size: .9rem;
+    width: 100%;
+    padding: .8rem;
+    border-radius: 999px;
+    text-align: center;
+    background-color: #ffeb00;
+    color: black;
+    font-weight: bold;
+
+}
+
+
+
+/* Chrome, Edge, Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
