@@ -6,6 +6,7 @@ import { Pagination } from "../components/Pagination.jsx"
 
 import '../App.css'
 import { SearchFormSection } from "../components/SearchFormSection.jsx"
+import MLSidebar from "../components/MLSidebar.jsx"
 
 export default function SearchPage() {
     const {
@@ -41,6 +42,7 @@ export default function SearchPage() {
                     />
                 )}
             </section>
+            <MLSidebar />
         </main>
     )
 }

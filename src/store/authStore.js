@@ -25,7 +25,8 @@ export const useAuthStore = create((set, get) => ({
                 loading: false,
                 isLoggedIn: true
             })
-
+            
+            
             localStorage.setItem('token', res.data.token)
             await get().bootstrapSession()
 

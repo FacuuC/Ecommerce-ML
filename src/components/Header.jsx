@@ -14,7 +14,7 @@ export function Header() {
 
     return (
         <header id="menu-bar">
-            <Link href="/">
+            <Link to="/">
                 <h2>MatienzoShop</h2>
             </Link>
 
@@ -35,6 +35,7 @@ export function Header() {
                     Sobre Nosotros
                 </NavLink>
             </nav>
+            
             <div id="sign-in">
                 {
                     isLoggedIn

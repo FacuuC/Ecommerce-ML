@@ -6,15 +6,16 @@ export const useSessionStore = create((set, get) => ({
     initSession: () => {
         let sessionId = sessionStorage.getItem("sessionId")
 
-        if (!sessionId) {
-            sessionId = crypto.randomUUID()
-            sessionStorage.setItem("sessionId", sessionId)
+        if (sessionId) {
+            set({ sessionId })
+            return sessionId
+        } else {
+            const newSessionId = crypto.randomUUID()
+            sessionStorage.setItem("sessionId", newSessionId)
+            set({ sessionId: newSessionId })  
+            return newSessionId                
         }
-
-        set({ sessionId: sessionId })
-        return sessionId
     },
-
     getSessionId: () => {
         const { sessionId, initSession } = get()
         return sessionId || initSession()

@@ -28,5 +28,8 @@ export const updateCartItemRequest = async (itemId, quantity) => {
     return cartClient.put(`/items/${itemId}`, { quantity })
 }
 
-export const checkoutRequest = async () =>
-    cartClient.post("/checkout")
+export const checkoutRequest = async (sessionId) =>
+    cartClient.post("/checkout", sessionId)
+
+export const clearCartRequest = async () => 
+    cartClient.delete("/clear")

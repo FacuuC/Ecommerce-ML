@@ -1,5 +1,5 @@
 import styles from "../styles/Cart.module.css"
-import { Link } from "./Link"
+import { Link } from "./Link.jsx"
 import { useCartStore } from "../store/cartStore"
 
 export function CartItemList({ items }) {
@@ -46,7 +46,7 @@ export function CartItemList({ items }) {
                 ))}
             </ul>
             <div className={styles.continueShopping}>
-                <Link href="/search" className={styles.btnOutline}>
+                <Link to="/search" className={styles.btnOutline}>
                     &larr; SEGUIR COMPRANDO
                 </Link>
                 <button onClick={handleEmptyCart} className={styles.btnClearCart}>VACIAR CARRITO</button>

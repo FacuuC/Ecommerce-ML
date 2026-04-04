@@ -1,10 +1,11 @@
 import { create } from "zustand";
-import { addToCartRequest } from "../api/cartApi";
+import { addToCartRequest, clearCartRequest } from "../api/cartApi";
 import { trackEvent } from "../services/trackingService";
 import { getCartRequest } from "../api/cartApi";
 import { removeFromCartRequest } from "../api/cartApi";
 import { updateCartItemRequest } from "../api/cartApi";
 import { checkoutRequest } from "../api/cartApi";
+import { useSessionStore } from "./sessionStore";
 
 export const useCartStore = create((set, get) => ({
     items: [],
@@ -87,7 +88,12 @@ export const useCartStore = create((set, get) => ({
         }
     },
 
-    clearCart: () => set({ items: [], total: 0 }),
+    clearCart: async () => {
+
+        clearCartRequest();
+
+        set({ items: [], total: 0 });
+    },
 
     updateItemQuantity: async (itemId, delta) => {
         const state = get()
@@ -122,7 +128,8 @@ export const useCartStore = create((set, get) => ({
         set({loading: true, error: null})
 
         try{
-            const res = await checkoutRequest()
+            const sessionId = useSessionStore.getState().getSessionId()
+            const res = await checkoutRequest(sessionId)
 
             if (res?.data?.cart){
                 set({
