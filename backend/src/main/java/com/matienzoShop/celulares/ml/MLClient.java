@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class MLClient {
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String ML_URL = "http://localhost:8000/predict";
+    private final String ML_URL = "http://ml-service:8000/predict";
 
     public double predict(List<EventDTO> events){
 
