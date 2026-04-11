@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import joblib
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GroupShuffleSplit
 from xgboost import XGBClassifier
 from sklearn.metrics import roc_auc_score, precision_recall_curve, classification_report, confusion_matrix
@@ -209,65 +210,116 @@ y_train, y_test = Y.iloc[train_idx], Y.iloc[test_idx]
 print("Train purchase rate:", y_train.mean())
 print("Test purchase rate:", y_test.mean())
 
-model = XGBClassifier(
+rf_model = RandomForestClassifier(
+    n_estimators=300,
+    max_depth=12,
+    class_weight="balanced",
+    random_state=42,
+    n_jobs=-1
+)
+    
+xgb_model = XGBClassifier(
     n_estimators=300,
     max_depth=6,
     learning_rate=0.05,
     subsample=0.8,
     colsample_bytree=0.8,
     scale_pos_weight=3,  # ajustar según imbalance
-    random_state=42
+    random_state=42,
+    eval_metric="logloss",
 )
 
-model.fit(X_train, y_train)
+models = {
+    "RandomForest": rf_model,
+    "XGBoost": xgb_model
+}
 
-# METRICAS
+results = {}
 
-probs = model.predict_proba(X_test)[:, 1]
-
-auc = roc_auc_score(y_test, probs)
-print("AUC:", auc)
-
-precision, recall, thresholds = precision_recall_curve(y_test, probs)
-
-# ejemplo: maximizar F1
-f1 = 2 * (precision * recall) / (precision + recall + 1e-8)
-best_threshold = thresholds[np.argmax(f1)]
-
-print("Best threshold:", best_threshold)
-
-# GRAFICADO
-
-importances = model.feature_importances_
-indices = np.argsort(importances)[::-1]
-
-plt.bar(range(len(features)), importances[indices])
-plt.xticks(range(len(features)), [features[i] for i in indices], rotation=90)
-plt.show()
-
-y_pred = (probs >= 0.538).astype(int)
-
-print(classification_report(y_test, y_pred))
-print(confusion_matrix(y_test, y_pred))
-
-for t in [0.4, 0.5, 0.6, 0.7]:
-    preds = (probs >= t).astype(int)
-    print(f"\nThreshold: {t}")
-    print(classification_report(y_test, preds))
+for name, model in models.items():
+    print(f"\n===== Training {name} =====")
+    model.fit(X_train, y_train)
     
+    probs = model.predict_proba(X_test)[:, 1]
+    
+    auc = roc_auc_score(y_test, probs)
+    print("AUC:", auc)
+
+    precision, recall, thresholds = precision_recall_curve(y_test, probs)
+    f1 = 2 * (precision * recall) / (precision + recall + 1e-8)
+    
+    best_threshold = thresholds[np.argmax(f1)]
+    print("Best threshold:", best_threshold)
+    
+    y_pred = (probs >= best_threshold).astype(int)
+    print(classification_report(y_test, y_pred))
+    
+    results[name] = {
+        "model": model,
+        "auc": auc,
+        "best_threshold": best_threshold,
+        "precision": precision,
+        "recall": recall,
+        "probs": probs
+    }
+
+# COMPARATIVA
+
+print("\n===== Model Comparison =====")
+for name in results:
+    print(f"{name} -> AUC={results[name]['auc']:.4f}, Best Threshold={results[name]['best_threshold']:.4f}")
+
+
+
+rf_auc = results["RandomForest"]["auc"]
+xgb_auc = results["XGBoost"]["auc"]
+
+diff = xgb_auc - rf_auc
+
+print("\nAUC Difference (XGB - RF):", diff)
+
+if diff > 0.03:
+    selected_model_name = "XGBoost"
+elif diff < -0.03:
+    selected_model_name = "RandomForest"
+else:
+    # empate técnico → elegimos robustez
+    selected_model_name = "RandomForest"
+
+print("Selected model:", selected_model_name)
+
+selected_model = results[selected_model_name]["model"]
+best_threshold = results[selected_model_name]["best_threshold"]
+
+
+# FEATURE IMPORTANCE
+# =========================
+
+if selected_model_name == "RandomForest":
+    importances = selected_model.feature_importances_
+else:
+    importances = selected_model.feature_importances_
 
 importance_df = pd.DataFrame({
     "feature": features,
-    "importance": model.feature_importances_
+    "importance": importances
 }).sort_values(by="importance", ascending=False)
 
+print("\nTop Features:")
 print(importance_df.head(10))
 
+# =========================
+# EXPORT FINAL
+# =========================
+
 artifact = {
-    "model": model,
+    "model": selected_model,
     "features": features,
-    "auc": auc,
-    "best_threshold": best_threshold
+    "auc": results[selected_model_name]["auc"],
+    "best_threshold": best_threshold,
+    "model_type": selected_model_name
 }
 
-#joblib.dump(artifact, "purchase_model2.pkl")
+joblib.dump(artifact, "purchase_model_final.pkl")
+
+print("\nModelo exportado:", selected_model_name)

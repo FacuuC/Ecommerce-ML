@@ -14,7 +14,7 @@ def to_python_types(d):
 
 app = FastAPI()
 
-artifact = joblib.load("C:\\Users\\facun\\Desktop\\programacion\\pagina Celulares React\\vite-project-matienzoShop\\purchase_model2.pkl")
+artifact = joblib.load("C:\\Users\\facun\\Desktop\\programacion\\pagina Celulares React\\vite-project-matienzoShop\\purchase_model_final.pkl")
 
 model = artifact["model"]
 features = artifact["features"]
