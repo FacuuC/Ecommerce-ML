@@ -12,7 +12,8 @@ import java.util.Map;
 @Service
 public class MLClient {
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String ML_URL = "http://ml-service:8000/predict";
+    @Value("${ML_URL}")
+    private String ML_URL;
 
     public double predict(List<EventDTO> events){
 
