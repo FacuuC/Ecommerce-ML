@@ -1,6 +1,7 @@
 package com.matienzoShop.celulares.ml;
 
 import com.matienzoShop.celulares.events.dto.EventDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
