@@ -105,6 +105,7 @@ The model prioritizes detecting potential buyers early in the session.
 
 ## 📁 Project Structure
 
+```
 ecommerce-ml-system/
 │
 ├── frontend/
@@ -112,7 +113,7 @@ ecommerce-ml-system/
 ├── ml-service/
 │
 └── README.md
-
+```
 ---
 
 ##🧠 Key Learnings
