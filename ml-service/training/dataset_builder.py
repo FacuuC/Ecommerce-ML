@@ -4,9 +4,6 @@ import json
 import csv
 import numpy as np
 from datetime import datetime, timedelta, timezone
-from faker import Faker
-
-faker = Faker()
 
 # -------------------------
 # CONFIG
@@ -234,9 +231,9 @@ def generate_dataset():
 # EXPORT (JSON)
 # -------------------------
 
-def export_to_json(events, filename="synthetic_events.json"):
+""" def export_to_json(events, filename="synthetic_events.json"):
     with open(filename, "w") as f:
-        json.dump(events, f, default=str)
+        json.dump(events, f, default=str) """
         
 # -------------------------
 # EXPORT (CSV)

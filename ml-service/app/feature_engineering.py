@@ -1,5 +1,4 @@
 from feature_schema import FEATURE_COLUMNS
-import pandas as pd
 
 def build_features(df):
     

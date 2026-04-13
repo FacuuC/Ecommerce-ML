@@ -1,11 +1,8 @@
 import pandas as pd
-
-from fastapi import FastAPI
-import joblib
-import numpy as np
-import os 
-
+from model_loader import load_artifact
 from feature_engineering import build_features
+from fastapi import FastAPI
+
 
 def to_python_types(d):
     return {
@@ -15,8 +12,7 @@ def to_python_types(d):
 
 app = FastAPI()
 
-model_path= os.path.join(os.path.dirname(__file__), "purchase_model_final.pkl")
-artifact = joblib.load(model_path)
+artifact = load_artifact()
 
 model = artifact["model"]
 features = artifact["features"]

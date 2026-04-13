@@ -7,17 +7,16 @@ from xgboost import XGBClassifier
 from sklearn.metrics import roc_auc_score, precision_recall_curve, classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 
-#Carga de datos
+# =========== Carga de datos ===========
 df = pd.read_csv("synthetic_events.csv")
-print(df.columns)
 
-# Convertir a tipos correctos
+# =========== Convertir a tipos correctos ===========
 df["created_at"] = pd.to_datetime(df["created_at"])
 
-# Ordenar por session_id y created_at para asegurar la secuencia temporal correcta
+# =========== Ordenar por session_id y created_at para asegurar la secuencia temporal correcta ===========
 df = df.sort_values(["session_id", "created_at"])
 
-#Features base por sesion
+# =========== Features base por sesion ===========
 session_df = df.groupby("session_id").agg({
     "user_id": "first",
     "anonymous_id": "first",
@@ -37,14 +36,14 @@ session_df.columns = [
 
 session_df = session_df.reset_index()
 
-#Features temporales
+# =========== Features temporales ===========   
 session_df["session_duration_seconds"] = (
     session_df["session_end"] - session_df["session_start"]
     ).dt.total_seconds()
 
 session_df["event_rate"] = session_df["events_count"] / session_df["session_duration_seconds"].replace(0, 1)
 
-#Features de eventos (conteos)
+# =========== Features de eventos (conteos) ===========
 def count_event(seq, event):
     return seq.count(event)
 
@@ -59,7 +58,7 @@ for event in [
 ]:
     session_df[event.lower()] = session_df["event_sequence"].apply(lambda seq: count_event(seq, event))
     
-#Renombramos
+# =========== Renombramos ===========
 session_df = session_df.rename(columns={
     "view_product": "product_views",
     "add_to_cart": "add_to_cart_count",
@@ -70,10 +69,10 @@ session_df = session_df.rename(columns={
     "purchase": "purchase_count"
 })
 
-#Ponemos purchase label
+# =========== Ponemos purchase label ===========
 session_df["label_purchase"] = (session_df["purchase_count"] > 0).astype(int)
 
-#Features de intensidad
+# =========== Features de intensidad ===========
 def unique_products(seq):
     return len(set([p for p in seq if pd.notnull(p)]))
 
@@ -87,7 +86,7 @@ session_df["top_product_view_ratio"] = session_df["product_sequence"].apply(
     lambda seq: max([seq.count(p) for p in set(seq)]) / len(seq) if len(seq) > 0 else 0
     )
 
-#Features temporales avanzados
+# =========== Features temporales avanzados ===========
 df["prev_time"] = df.groupby("session_id")["created_at"].shift(1)
 df["delta"] = (df["created_at"] - df["prev_time"]).dt.total_seconds()
 
@@ -96,7 +95,7 @@ avg_time.columns = ["session_id", "avg_time_between_events"]
 
 session_df = session_df.merge(avg_time, on="session_id", how="left")
 
-#Time to first cart
+# =========== Time to first cart ===========
 def time_to_event(group, event_name):
     start = group["created_at"].iloc[0]
     target = group[group["event_type"] == event_name]
@@ -111,17 +110,17 @@ time_to_cart.columns = ["session_id", "time_to_first_cart"]
 
 session_df = session_df.merge(time_to_cart, on="session_id", how="left")
 
-#Ratios clave
+# =========== Ratios clave ===========
 session_df["cart_view_ratio"] = session_df["add_to_cart_count"] / session_df["product_views"].replace(0, 1)
 session_df["favorites_ratio"] = session_df["favorites_add_count"] / session_df["product_views"].replace(0, 1)
 session_df["cart_remove_ratio"] = session_df["remove_from_cart_count"] / session_df["add_to_cart_count"].replace(0, 1)
 
-#Features de intencion
+# =========== Features de intencion ===========
 session_df["has_added_to_cart"] = (session_df["add_to_cart_count"] > 0).astype(int)
 session_df["has_favorited"] = (session_df["favorites_add_count"] > 0).astype(int)
 session_df["has_searched"] = (session_df["search_count"] > 0).astype(int)
 
-#Transiciones
+# =========== Transiciones ===========
 def count_transition(seq, a, b):
     return sum(1 for i in range(len(seq)-1) if seq[i] == a and seq[i+1] == b)
 
@@ -133,20 +132,20 @@ session_df["view_to_cart_transition_rate"] = (
     session_df["view_to_cart_transition"] / session_df["product_views"].replace(0, 1)
 )
 
-#Cart cycles
+# =========== Cart cycles ===========
 session_df["cart_cycles"] = session_df[["add_to_cart_count", "remove_from_cart_count"]].min(axis=1)
 
-#Limpieza final
+# =========== Limpieza final ===========
 final_df = session_df.drop(columns=[
     "event_sequence",
     "product_sequence",
     "purchase_count"
 ])
 
-#Exportamos a csv
+# =========== Exportamos a csv ===========
 #final_df.to_csv("purchase_sessions.csv", index=False)
 
-# -------------------------
+# --------------------------------------------------------
 features = [
     # volumen
     "events_count",
@@ -196,7 +195,7 @@ df = final_df[features + ["label_purchase", "user_id", "anonymous_id"]].copy()
 X = df[features]
 Y = df["label_purchase"]
 
-# MODELO
+# ================= MODELO ========================
 
 groups = df["user_id"].fillna(df["anonymous_id"])
 
