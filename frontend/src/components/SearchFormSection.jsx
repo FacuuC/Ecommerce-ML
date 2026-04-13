@@ -1,5 +1,6 @@
 import { useId, useRef, useEffect } from "react"
 import { useSearchForm } from "../hooks/useSearchForm"
+import { useState } from "react"
 
 export function SearchFormSection({ onFiltersChange, initialFilters }) {
     const idText = useId()
@@ -12,6 +13,18 @@ export function SearchFormSection({ onFiltersChange, initialFilters }) {
     const selectBateriaRef = useRef()
 
     const { handleFormChange, handleClearInput } = useSearchForm({idText, idMarca, idCapacidad, idBateria, onFiltersChange, inputRef})
+    const [ marcas, setMarcas] = useState([])
+    const [ selectedMarca, setSelectedMarca ] = useState(initialFilters?.marca || '')
+
+    useEffect(() => {
+        fetch('http://localhost:8080/celulares/marcas')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Marcas fetched:', data)
+                setMarcas(data)
+            })
+            .catch(error => console.error('Error fetching marcas:', error))
+    }, [])
 
     // Actualizar valores cuando cambien los initialFilters (desde la URL)
     useEffect(() => {
@@ -31,6 +44,7 @@ export function SearchFormSection({ onFiltersChange, initialFilters }) {
             const bateriaValue = initialFilters.bateria ? String(initialFilters.bateria) : ''
             selectBateriaRef.current.value = bateriaValue
         }
+        setSelectedMarca(initialFilters?.marca || '')
     }, [initialFilters])
         return (
         <section className="cels-search">
@@ -52,15 +66,13 @@ export function SearchFormSection({ onFiltersChange, initialFilters }) {
                 <div className="search-filters">
                     <select 
                     ref={selectMarcaRef}
-                    defaultValue={initialFilters?.marca || ''}
+                    value={selectedMarca}
                     name={idMarca}
                     >
                         <option value="">Marca</option>
-                        <option value="Apple">Apple</option>
-                        <option value="Samsung">Samsung</option>
-                        <option value="Xiaomi">Xiaomi</option>
-                        <option value="Motorola">Motorola</option>
-                        <option value="Huawei">Huawei</option>
+                        {marcas.map(marca => (
+                            <option key={marca} value={marca}>{marca}</option>
+                        ))}
                     </select>
                     <select 
                     ref={selectCapacidadRef}

@@ -3,6 +3,7 @@ import pandas as pd
 from fastapi import FastAPI
 import joblib
 import numpy as np
+import os 
 
 from feature_engineering import build_features
 
@@ -14,7 +15,8 @@ def to_python_types(d):
 
 app = FastAPI()
 
-artifact = joblib.load("C:\\Users\\facun\\Desktop\\programacion\\pagina Celulares React\\vite-project-matienzoShop\\purchase_model_final.pkl")
+model_path= os.path.join(os.path.dirname(__file__), "purchase_model_final.pkl")
+artifact = joblib.load(model_path)
 
 model = artifact["model"]
 features = artifact["features"]

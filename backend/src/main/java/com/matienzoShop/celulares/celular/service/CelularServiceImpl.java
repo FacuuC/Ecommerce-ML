@@ -55,4 +55,13 @@ public class CelularServiceImpl implements CelularService{
         return celularRepository.buscarConFiltros(marca, minBat, maxBat, almacenamiento, search, pageable);
     }
 
+    @Override
+    public List<String> getMarcas() {
+        return celularRepository.findDistinctMarcas()
+            .stream()
+            .sorted()
+            .filter(m -> m != null && !m.isBlank())
+            .toList();
+    }
+
 }

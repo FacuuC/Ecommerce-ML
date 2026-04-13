@@ -73,4 +73,9 @@ public class CelularController {
     public void eliminarCelular (@PathVariable Long id){
         celularService.eliminar(id);
     }
+
+    @GetMapping("/marcas")
+    public List<String> getMarcas(){
+        return celularService.getMarcas();
+    }
 }

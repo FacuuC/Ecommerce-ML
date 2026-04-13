@@ -13,6 +13,7 @@ export function CelCard({ productoCel }) {
             }
             <h3>{productoCel.modelo}</h3>
             <div className="producto-info">
+                <p><strong>Marca:</strong> {productoCel.marca}</p>
                 <p><strong>Capacidad:</strong> {productoCel.almacenamiento} GB</p>
                 <p><strong>Color:</strong> {productoCel.color}</p>
                 <p><strong>Batería:</strong> {productoCel.bateria}%</p>

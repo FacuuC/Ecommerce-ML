@@ -14,4 +14,5 @@ public interface CelularService {
     Celular buscarPorId(Long id);
     void eliminar (Long Id);
     void guardarTodos(List<@Valid Celular> listaCelulares);
+    List<String> getMarcas();
 }

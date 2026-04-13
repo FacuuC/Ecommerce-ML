@@ -1,12 +1,17 @@
 package com.matienzoShop.celulares.celular.repository;
 
 import com.matienzoShop.celulares.celular.model.Celular;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CelularRepository extends JpaRepository<Celular, Long> {
 
     @Query(
@@ -44,5 +49,8 @@ public interface CelularRepository extends JpaRepository<Celular, Long> {
             @Param("search") String search,
             Pageable pageable
     );
+
+    @Query(value = "SELECT DISTINCT c.marca FROM Celular c")
+    List<String> findDistinctMarcas();
 
 }
