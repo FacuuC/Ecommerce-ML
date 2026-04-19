@@ -6,16 +6,22 @@ import java.util.List;
 
 public class SessionAnalysisResponse {
 
-    private String sessionId;
+    private String targetId;
+    private String analysisType; //"ANONYMOUS" o "REGISTERED"
     private List<PredictionLog> events;
 
-    public SessionAnalysisResponse(String sessionId, List<PredictionLog> events){
-        this.sessionId = sessionId;
+    public SessionAnalysisResponse(String targetId, String analysisType, List<PredictionLog> events){
+        this.targetId = targetId;
+        this.analysisType = analysisType;
         this.events = events;
     }
 
-    public String getSessionId(){
-        return sessionId;
+    public String getTargetId(){
+        return targetId;
+    }
+
+    public String getAnalysisType(){
+        return analysisType;
     }
 
     public List<PredictionLog> getEvents(){

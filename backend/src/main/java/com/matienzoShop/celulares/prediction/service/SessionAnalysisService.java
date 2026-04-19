@@ -3,10 +3,10 @@ package com.matienzoShop.celulares.prediction.service;
 import com.matienzoShop.celulares.prediction.dto.SessionAnalysisResponse;
 import com.matienzoShop.celulares.prediction.model.PredictionLog;
 import com.matienzoShop.celulares.prediction.repository.PredictionRepository;
-import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SessionAnalysisService {
@@ -16,12 +16,18 @@ public class SessionAnalysisService {
     public SessionAnalysisService(PredictionRepository predictionRepository) {
         this.predictionRepository = predictionRepository;
     }
+    
+    public SessionAnalysisResponse analyzeAnonymous (String anonymousId) {
+            List<PredictionLog> logs =
+                predictionRepository.findByAnonymousIdOrderByTimestampAsc(anonymousId);
 
-    public SessionAnalysisResponse analyzeSession (String sessionId) {
+        return new SessionAnalysisResponse(anonymousId, "ANONYMOUS", logs);
+    }
 
+    public SessionAnalysisResponse analyzeUser (UUID userId) {
         List<PredictionLog> logs =
-                predictionRepository.findBySessionIdOrderByTimestampAsc(sessionId);
+                predictionRepository.findByUserIdOrderByTimestampAsc(userId);
 
-        return new SessionAnalysisResponse(sessionId, logs);
+        return new SessionAnalysisResponse(userId.toString(), "REGISTERED", logs);
     }
 }

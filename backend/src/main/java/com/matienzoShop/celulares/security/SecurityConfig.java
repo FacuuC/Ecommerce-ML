@@ -1,6 +1,5 @@
 package com.matienzoShop.celulares.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,6 +13,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import jakarta.servlet.DispatcherType;
+
 import java.util.List;
 
 @EnableWebSecurity
@@ -21,9 +22,12 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final RateLimitFilter rateLimitFilter;
 
-    public SecurityConfig (JwtAuthFilter jwtAuthFilter) {
+    public SecurityConfig (JwtAuthFilter jwtAuthFilter,
+                            RateLimitFilter rateLimitFilter) {
         this.jwtAuthFilter = jwtAuthFilter;
+        this.rateLimitFilter = rateLimitFilter;
     }
 
     @Bean
@@ -38,16 +42,25 @@ public class SecurityConfig {
                  .cors(Customizer.withDefaults())
                  .csrf(csrf -> csrf.disable())
                  .authorizeHttpRequests(auth -> auth
+                    .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+
                         .requestMatchers(
-                                "/auth/**",
-                                "/test-env",
+                                "/auth/login",
+                                "/auth/register",
                                 "/celulares/**",
                                 "/events",
-                                "/sessions/**",
-                                "/cart/**"
+                                "/analysis/anonymous/**"
                         ).permitAll()
+
+                        .requestMatchers(
+                                "/cart/**",
+                                "/analysis/me"
+                        ).authenticated()
+
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
                  .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
          return http.build();

@@ -5,7 +5,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GroupShuffleSplit
 from xgboost import XGBClassifier
 from sklearn.metrics import roc_auc_score, precision_recall_curve, classification_report, confusion_matrix
-import matplotlib.pyplot as plt
 
 # =========== Carga de datos ===========
 df = pd.read_csv("synthetic_events.csv")

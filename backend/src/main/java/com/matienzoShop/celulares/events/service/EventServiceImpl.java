@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -87,8 +88,12 @@ public class EventServiceImpl implements EventService{
 
         eventRepository.save(event);
 
+        UUID userId = (user != null) ? user.getId() : null;
+
         predictionService.processEvent(
                 request.sessionId(),
+                anonymousId,
+                userId,
                 request.eventType(),
                 request.productId()
         );

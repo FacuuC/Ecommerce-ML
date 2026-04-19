@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { loginRequest, registerRequest } from "../api/authApi";
+import { loginRequest, registerRequest, verifyTokenRequest } from "../api/authApi";
 import { trackEvent } from "../services/trackingService";
 import { useCartStore } from "./cartStore";
 import { useSessionStore } from "./sessionStore";
@@ -9,15 +9,19 @@ export const useAuthStore = create((set, get) => ({
     token: null,
     loading: false,
     error: null,
-    isLoggedInIn: false,
+    isLoggedIn: false,
+    isAuthLoading: false,
     setError: (error) => set({ error }),
 
     //Acciones
     login: async (email, password) => {
         set({ loading: true, error: null })
 
+        const res = await loginRequest({ email, password })
+        localStorage.setItem('token', res.data.token)
+
         try {
-            const res = await loginRequest({ email, password })
+            await useCartStore.getState().fetchCart()
 
             set({
                 user: res.data.userId,
@@ -25,15 +29,12 @@ export const useAuthStore = create((set, get) => ({
                 loading: false,
                 isLoggedIn: true
             })
-            
-            
-            localStorage.setItem('token', res.data.token)
-            await get().bootstrapSession()
-
             return true
 
         } catch (err) {
             console.error("Error en login:", err)
+
+            localStorage.removeItem('token')
 
             const message =
                 err.response?.data?.message ||
@@ -120,12 +121,18 @@ export const useAuthStore = create((set, get) => ({
 
 
     restoreSession: async (token) => {
-        set({ token, isLoggedIn: true })
-
         try {
-            await useCartStore.getState().fetchCart()
+            await verifyTokenRequest() // Verifica si el token es válido y obtiene datos del usuario
+
+            set({ token, isLoggedIn: true, isAuthLoading: false })
+
+            await useCartStore.getState().fetchCart() // Restaura el carrito asociado a la sesión
+
         } catch (error) {
             console.error("Error restaurando sesión:", error)
+
+            localStorage.removeItem('token')
+            set({ token: null, isLoggedIn: false, isAuthLoading: false })
         }
     }
 }))

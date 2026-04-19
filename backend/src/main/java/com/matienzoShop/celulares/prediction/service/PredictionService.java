@@ -8,7 +8,7 @@ import com.matienzoShop.celulares.session.SessionState;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class PredictionService {
@@ -25,7 +25,7 @@ public class PredictionService {
         this.logger = logger;
     }
 
-    public void processEvent (String sessionId, EventType eventType, Long productId) {
+    public void processEvent (String sessionId, String anonymousId, UUID userId, EventType eventType, Long productId) {
 
         if(sessionId == null || sessionId.isBlank()){
             return;
@@ -47,7 +47,7 @@ public class PredictionService {
 
         double probability = mlClient.predict(events);
 
-        logger.log(sessionId, eventType, null, probability);
+        logger.log(sessionId, anonymousId, userId, eventType, null, probability);
 
         System.out.println(
                 "[ML] Session= " + sessionId +

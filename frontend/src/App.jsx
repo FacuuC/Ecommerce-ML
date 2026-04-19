@@ -11,6 +11,8 @@ import { useAuthStore } from './store/authStore.js'
 import './App.css'
 import { useSessionStore } from './store/sessionStore.js'
 
+import { jwtDecode } from 'jwt-decode'
+
 const HomePage = lazy(() => import("./pages/Home.jsx"))
 const SearchPage = lazy(() => import("./pages/Search.jsx"))
 const NotFoundPage = lazy(() => import('./pages/404.jsx'))
@@ -22,15 +24,31 @@ const CartPage = lazy(() => import("./pages/Cart.jsx"))
 
 export function App() {
     const initSession = useSessionStore((state) => state.initSession)
+    const restoreSession = useAuthStore((state) => state.restoreSession)
+    const isAuthLoading = useAuthStore((state) => state.isAuthLoading)
+
+    if (isAuthLoading) {
+        return <div style={{maxWidth: '1280px', margin:'0 auto', padding:'0 1rem'}}>Cargando...</div>
+    }
+
+    function isTokenValid(token) {
+        try {
+            const decoded = jwtDecode(token)
+            return decoded.exp * 1000 > Date.now() // Verifica si el token no ha expirado
+        } catch {
+            return false // Se considera inválido
+        }
+    }
 
     useEffect(() => {
         document.title = "Matienzo Shop - Tu tienda de celulares online"
         initSession()
         const token = localStorage.getItem('token')
 
-        if (token) {
-            // Si hay un token, bootstrap de la sesión para cargar datos como el carrito
-            useAuthStore.getState().restoreSession(token)
+        if (token && isTokenValid(token) ) {
+            restoreSession(token)
+        } else {
+            localStorage.removeItem('token') // Elimina el token inválido
         }
     }, [])
 

@@ -1,84 +1,66 @@
-import { useId, useRef, useEffect } from "react"
+import { useId, useEffect, useRef } from "react"
 import { useSearchForm } from "../hooks/useSearchForm"
 import { useState } from "react"
 
 export function SearchFormSection({ onFiltersChange, initialFilters }) {
-    const idText = useId()
-    const idMarca = useId()
-    const idCapacidad = useId()
-    const idBateria = useId()
-    const inputRef = useRef()
-    const selectMarcaRef = useRef()
-    const selectCapacidadRef = useRef()
-    const selectBateriaRef = useRef()
-
-    const { handleFormChange, handleClearInput } = useSearchForm({idText, idMarca, idCapacidad, idBateria, onFiltersChange, inputRef})
     const [ marcas, setMarcas] = useState([])
-    const [ selectedMarca, setSelectedMarca ] = useState(initialFilters?.marca || '')
 
     useEffect(() => {
         fetch('http://localhost:8080/celulares/marcas')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Marcas fetched:', data)
-                setMarcas(data)
-            })
+            .then(res => res.json())
+            .then(setMarcas)
             .catch(error => console.error('Error fetching marcas:', error))
     }, [])
 
-    // Actualizar valores cuando cambien los initialFilters (desde la URL)
-    useEffect(() => {
-        if (inputRef.current && initialFilters?.search !== undefined) {
-            inputRef.current.value = initialFilters.search || ''
-        }
-        if (selectMarcaRef.current && initialFilters?.marca !== undefined) {
-            selectMarcaRef.current.value = initialFilters.marca || ''
-        }
-        if (selectCapacidadRef.current && initialFilters?.capacidad !== undefined) {
-            // Convertir a string si es número
-            const capacidadValue = initialFilters.capacidad ? String(initialFilters.capacidad) : ''
-            selectCapacidadRef.current.value = capacidadValue
-        }
-        if (selectBateriaRef.current && initialFilters?.bateria !== undefined) {
-            // Convertir a string si es número
-            const bateriaValue = initialFilters.bateria ? String(initialFilters.bateria) : ''
-            selectBateriaRef.current.value = bateriaValue
-        }
-        setSelectedMarca(initialFilters?.marca || '')
-    }, [initialFilters])
-        return (
+    const handleChange = (field, value) => {
+        onFiltersChange({
+            ...initialFilters,
+            [field]: value
+        })
+    }
+
+    const handleClear = () => {
+        onFiltersChange({
+            search: '',
+            marca: '',
+            capacidad: '',
+            bateria: ''
+        })
+    }
+
+    return (
         <section className="cels-search">
             <h1>Encuentra tu próximo iPhone</h1>
             <p>Explora entre gran variedad de oportunidades</p>
 
-            <form onChange={handleFormChange} role="search" id="cels-search-form">
-
+            
                 <div className="search-bar">
                     <input
-                        ref={inputRef}
-                        name={idText} type="text" id="cels-search-input"
+                        value={initialFilters.search || ''}
                         placeholder="Busca celulares"
-                        defaultValue={initialFilters?.search || ''}
+                        onChange={(e) => handleChange('search', e.target.value)}
                     />
 
-                    <button onClick={handleClearInput}>Limpiar filtros</button>
+                    <button onClick={handleClear}>
+                        Limpiar filtros
+                    </button>
+
                 </div>
+
                 <div className="search-filters">
                     <select 
-                    ref={selectMarcaRef}
-                    value={selectedMarca}
-                    name={idMarca}
+                    value={initialFilters.marca || ''}
+                    onChange={(e) => handleChange('marca', e.target.value)}
                     >
                         <option value="">Marca</option>
-                        {marcas.map(marca => (
-                            <option key={marca} value={marca}>{marca}</option>
+                        {marcas.map(m => (
+                            <option key={m} value={m}>{m}</option>
                         ))}
                     </select>
+
                     <select 
-                    ref={selectCapacidadRef}
-                    defaultValue={initialFilters?.capacidad ? String(initialFilters.capacidad) : ''}
-                    name={idCapacidad} 
-                    id="capacity-filter"
+                    value={initialFilters.capacidad || ''}
+                    onChange={(e) => handleChange('capacidad', e.target.value)}
                     >
                         <option value="">Capacidad</option>
                         <option value="64">64 GB</option>
@@ -86,11 +68,10 @@ export function SearchFormSection({ onFiltersChange, initialFilters }) {
                         <option value="256">256 GB</option>
                         <option value="512">512 GB</option>
                     </select>
+
                     <select 
-                    ref={selectBateriaRef}
-                    defaultValue={initialFilters?.bateria ? String(initialFilters.bateria) : ''}
-                    name={idBateria} 
-                    id="batery-filter"
+                    value={initialFilters.bateria || ''}
+                    onChange={(e) => handleChange('bateria', e.target.value)}
                     >
                         <option value="">Bateria</option>
                         <option value="100">100% (Nuevo)</option>
@@ -101,7 +82,6 @@ export function SearchFormSection({ onFiltersChange, initialFilters }) {
                     </select>
 
                 </div>
-            </form>
         </section>
     )
 }

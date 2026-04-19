@@ -1,35 +1,24 @@
-import axios from "axios";
+import { privateApi } from "./privateApi"
 
-const cartClient = axios.create({
-    baseURL: 'http://localhost:8080/cart'
-})  
-
-cartClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token')
-    if (token) {
-        config.headers.Authorization= `Bearer ${token}`
-    }
-    return config
-})
-
-export const addToCartRequest = async (productId, quantity) => {
-    return cartClient.post("/items", { productId, quantity })
+export const addToCartRequest = (productId, quantity) => {
+    return privateApi.post("/cart/items", { productId, quantity })
 }
 
-export const getCartRequest = async () => {
-    return cartClient.get()
+export const getCartRequest = () => {
+    return privateApi.get("/cart")
 }
 
-export const removeFromCartRequest = async (itemId) => {
-    return cartClient.delete(`/items/${itemId}`)
+export const removeFromCartRequest = (itemId) => {
+    return privateApi.delete(`/cart/items/${itemId}`)
 }
 
-export const updateCartItemRequest = async (itemId, quantity) => {
-    return cartClient.put(`/items/${itemId}`, { quantity })
+export const updateCartItemRequest = (itemId, quantity) => {
+    return privateApi.put(`/cart/items/${itemId}`, { quantity })
 }
 
-export const checkoutRequest = async (sessionId) =>
-    cartClient.post("/checkout", sessionId)
+export const checkoutRequest = (sessionId) =>
+    privateApi.post("/cart/checkout", { sessionId })
 
-export const clearCartRequest = async () => 
-    cartClient.delete("/clear")
+export const clearCartRequest = () => 
+    privateApi.delete("/cart/clear")
+

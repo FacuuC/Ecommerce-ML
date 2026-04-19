@@ -1,4 +1,4 @@
-from feature_schema import FEATURE_COLUMNS
+from .feature_schema import FEATURE_COLUMNS
 
 def build_features(df):
     

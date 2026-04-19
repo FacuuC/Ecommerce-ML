@@ -79,7 +79,7 @@ export default function CelDetail() {
                 <nav className={styles.breadcrumb}>
                     <div className={styles.breadcrumbContent}>
                         <Link
-                            href="/"
+                            to="/"
                             className={styles.breadcrumbButton}>
                             Inicio
                         </Link>
@@ -88,7 +88,7 @@ export default function CelDetail() {
                         >{'>'}</span>
                         <Link
                             className={styles.breadcrumbButton}
-                            href="/search">
+                            to="/search">
                             Celulares
                         </Link>
                         <span

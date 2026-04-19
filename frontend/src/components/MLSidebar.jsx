@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import { useSessionStore } from "../store/sessionStore.js";
+import { privateApi } from "../api/privateApi.js";
+import { useAuthStore } from "../store/authStore.js";
 
 export default function MLSidebar() {
 
@@ -10,7 +12,8 @@ export default function MLSidebar() {
     const chartRef = useRef(null);
     const chartInstance = useRef(null);
 
-    const sessionId = useSessionStore((state) => state.sessionId)
+    const anonymousId = localStorage.getItem("anonymousId");
+    const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
 
     useEffect(() => {
 
@@ -55,19 +58,18 @@ export default function MLSidebar() {
 
     //Polling 
     useEffect(() => {
-        if (!sessionId) return;
+        if (!isLoggedIn && !anonymousId) return;
 
         const interval = setInterval(async () => {
 
+        const url = isLoggedIn ?   
+            `/analysis/me` : 
+            `/analysis/anonymous/${anonymousId}`
+
             try {
-                const res = await fetch(
-                    `http://localhost:8080/sessions/${sessionId}/analysis`
-                );
-
-                const data = await res.json();
-                console.log("Analysis data:", data);
-
+                const { data } = await privateApi.get(url);
                 updateChart(data);
+
             } catch (error) {
                 console.error("Error fetching analysis data:", error);
             }
@@ -75,7 +77,7 @@ export default function MLSidebar() {
 
         return () => clearInterval(interval);
 
-    }, [sessionId]);
+    }, [anonymousId, isLoggedIn]);
 
     const updateChart = (data) => {
 

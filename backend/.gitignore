@@ -35,3 +35,7 @@ build/
 # Environment variables
 .env
 *.env
+
+# Otros
+.git
+node_modules

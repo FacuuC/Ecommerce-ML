@@ -3,18 +3,16 @@ package com.matienzoShop.celulares.security;
 import com.matienzoShop.celulares.user.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
-import java.util.function.Function;
 
 @Service
 public class JwtService {
@@ -65,6 +63,10 @@ public class JwtService {
 
     // Validar token
     public boolean isTokenValid(String token) {
-        return extractAllClaims(token).getExpiration().after(new Date());
+        try {
+            return extractAllClaims(token).getExpiration().after(new Date());
+        } catch (ExpiredJwtException e) {
+            return false;
+        }
     }
 }

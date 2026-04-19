@@ -1,5 +1,7 @@
 package com.matienzoShop.celulares.prediction.model;
 
+import java.util.UUID;
+
 import com.matienzoShop.celulares.events.model.EventType;
 import jakarta.persistence.*;
 
@@ -21,6 +23,10 @@ public class PredictionLog {
 
     @Column(columnDefinition = "TEXT")
     private String featuresJson;
+
+    private String anonymousId;
+
+    private UUID userId;
 
     public String getSessionId() {
         return sessionId;
@@ -60,5 +66,21 @@ public class PredictionLog {
 
     public void setFeaturesJson(String featuresJson) {
         this.featuresJson = featuresJson;
+    }
+
+    public String getAnonymousId() {
+        return anonymousId;
+    }
+
+    public void setAnonymousId(String anonymousId) {
+        this.anonymousId = anonymousId;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 }

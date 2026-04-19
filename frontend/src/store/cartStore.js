@@ -6,6 +6,8 @@ import { removeFromCartRequest } from "../api/cartApi";
 import { updateCartItemRequest } from "../api/cartApi";
 import { checkoutRequest } from "../api/cartApi";
 import { useSessionStore } from "./sessionStore";
+import toast from "react-hot-toast";
+import { useAuthStore } from "./authStore";
 
 export const useCartStore = create((set, get) => ({
     items: [],
@@ -29,6 +31,7 @@ export const useCartStore = create((set, get) => ({
         } catch (error) {
             console.error("Error fetching cart:", error)
             set({ error: 'Error al obtener el carrito' })
+            throw error
         } finally {
             set({ loading: false })
         }
@@ -36,6 +39,13 @@ export const useCartStore = create((set, get) => ({
 
 
     addToCart: async (productId, quantity) => {
+        const isLoggedIn = !!useAuthStore.getState().isLoggedIn
+
+        if (!isLoggedIn) {
+            toast.error("Debes iniciar sesión para agregar productos al carrito")
+            return false
+        }
+
         set({ loading: true, error: null })
 
         try {
@@ -89,10 +99,16 @@ export const useCartStore = create((set, get) => ({
     },
 
     clearCart: async () => {
+        try {
+            await clearCartRequest();
+            set({ items: [], total: 0 });
+        } catch (err) {
+            console.error("Error clearing cart:", err);
+            set({ error: 'Error al vaciar el carrito' });
+        }
+        
 
-        clearCartRequest();
-
-        set({ items: [], total: 0 });
+        
     },
 
     updateItemQuantity: async (itemId, delta) => {

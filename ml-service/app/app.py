@@ -1,6 +1,6 @@
 import pandas as pd
-from model_loader import load_artifact
-from feature_engineering import build_features
+from .model_loader import load_artifact
+from .feature_engineering import build_features
 from fastapi import FastAPI
 
 
