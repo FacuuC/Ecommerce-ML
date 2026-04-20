@@ -177,7 +177,7 @@ ecommerce-ml-system/
 
 ### 1. Clone the repository
 ```bash
-git clone [https://github.com/FacuuC/Ecommerce-ML.git](https://github.com/FacuuC/Ecommerce-ML.git)
+git clone https://github.com/FacuuC/Ecommerce-ML.git
 cd ecommerce-ml
 ```
 
