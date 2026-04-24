@@ -12,6 +12,7 @@ import './App.css'
 import { useSessionStore } from './store/sessionStore.js'
 
 import { jwtDecode } from 'jwt-decode'
+import MLSidebar from './components/MLSidebar.jsx'
 
 const HomePage = lazy(() => import("./pages/Home.jsx"))
 const SearchPage = lazy(() => import("./pages/Search.jsx"))
@@ -55,6 +56,7 @@ export function App() {
     return (
         <>
             <Header />
+            <MLSidebar />
 
             <Toaster position="top-right" reverseOrder={false} />
             <Suspense fallback={<div style={{maxWidth: '1280px', margin:'0 auto', padding:'0 1rem'}}>Cargando...</div>}>

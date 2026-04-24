@@ -45,6 +45,15 @@ export default function MLSidebar() {
                     x: {
                         grid: {
                             color: '#eee'
+                        },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            align: 'start',
+                            autoSkip: false,
+                            callback: function(value) {
+                                return this.getLabelForValue(value);
+                            }
                         }
                     }
                 }
@@ -79,15 +88,24 @@ export default function MLSidebar() {
 
     }, [anonymousId, isLoggedIn]);
 
+    const humanizeEventLabel = (eventType, index) => {
+        const rawLabel = eventType || `Event ${index + 1}`;
+        return rawLabel
+            .toString()
+            .replace(/_/g, ' ')
+            .toLowerCase()
+            .replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+
     const updateChart = (data) => {
 
         if (!chartInstance.current) return;
 
         const probsRaw = data.events.map(e => e.prediction);
         // 👉 opcional: escala visual (para demo)
-        const probs = probsRaw.map(p => p); // o p * 10 si querés amplificar
+        const probs = probsRaw.map(p => p *1.5); // o p * 10 si querés amplificar
 
-        const labels = data.events.map((e, i) => i + 1);
+        const labels = data.events.map((e, i) => humanizeEventLabel(e.eventType || e.event_type || e.type, i));
         
         if (probs.length < 2) {
             chartInstance.current.data.labels = ["Start"];
@@ -103,7 +121,9 @@ export default function MLSidebar() {
         chartInstance.current.update();
 
         const lastProb = probs[probs.length - 1] || 0;
-        setProb(lastProb);
+        if (probs.length >= 2) {
+            setProb(lastProb);
+        }
     };
 
     const getIntentLabel = () => {
@@ -113,6 +133,11 @@ export default function MLSidebar() {
     }
 
     const intent = getIntentLabel()
+
+    let bgColor = '#f0f0f0'; // default gray
+    if (prob > 0.4) bgColor = '#d4edda'; // light green
+    else if (prob > 0.2) bgColor = '#fff3cd'; // light yellow
+    else bgColor = '#f8d7da'; // light red
 
     return (
         <>
@@ -133,6 +158,21 @@ export default function MLSidebar() {
             >
                 {isOpen ? "Close ML" : "Open ML"}
             </button>
+            {/* <div style={{
+                position: "fixed",
+                top: "80px",
+                right: "20px",
+                background: bgColor,
+                border: "1px solid #ddd",
+                borderRadius: "8px",
+                padding: "10px 15px",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                zIndex: 1001,
+                fontSize: "14px",
+                fontWeight: "bold"
+            }}>
+                Purchase Probability: {prob.toFixed(2)}
+            </div> */}
             <div style={{
                 position: "fixed",
                 right: isOpen ? "0" : "-550px",
