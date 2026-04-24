@@ -140,9 +140,17 @@ This prediction is continuously updated as user behavior evolves.
 
 ---
 
-## 🖥️ Application UI
+## 📈 Live Prediction Visualization
 
-*[Insert UI Screenshots / Layouts here]*
+The frontend was purposely built with a minimal, functional design to serve as a vehicle for the Machine Learning pipeline. The core focus of the UI is the **Real-Time ML Sidebar**.
+
+As the user browses the catalog and interacts with items, the sidebar renders a live line chart plotting the **Purchase Probability (y-axis)** against the **Sequence of Events (x-axis)**.
+
+<p align="center">
+  <img src="docs/User Purchase-Intent Prediction.png" alt="Probability vs Events Chart" width="600">
+</p>
+
+This visualization proves that the identity resolution and the event-driven communication between the React client, the Spring Boot backend, and the Python ML service work seamlessly in real time.
 
 ---
 
