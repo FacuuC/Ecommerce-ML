@@ -4,7 +4,9 @@ End-to-end fullstack e-commerce system that predicts user purchase intent in rea
 
 ---
 
-*[DEMO: GIF interacción del usuario / predicción en tiempo real]*
+<p align="center">
+  <img src="docs/EcommerceML-customer.gif" alt="Real-time ML Prediction Demo" width="800">
+</p>
 
 ---
 
